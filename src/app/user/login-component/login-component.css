@@ -1,17 +1,16 @@
 .field-icon {
     float: right;
-    margin-left: -25px;
-    margin-top: -25px;
+    margin-top: -1.7rem;
+    padding-right: 1.5rem;
     position: relative;
     z-index: 2;
   }
   
-  .container{
-    padding-top:50px;
-    margin: auto;
-  }
 
-  form {
-        margin: 0 auto; 
-        width:80%;
-        }
+.center {
+  text-align: center;
+}
+
+.card {
+  background-color: ghostwhite;
+}
