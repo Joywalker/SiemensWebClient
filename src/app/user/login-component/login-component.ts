@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
             return;
         }
         if (this.title == "Create") {
-            this._userManagementService.saveUser(this.userLoginForm.value)
+            this._userManagementService.loginUser(this.userLoginForm.value)
                 .subscribe((data) => {
-                    console.log(data);
+                    console.log("AM PRIMIT ROLUL DE --> "+data);
                 }, error => this.errorMessage = error)
         }
     }
