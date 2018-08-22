@@ -13,16 +13,17 @@ export class UserManagementService {
 
     myAppUrl: string = "http://localhost:50161/";
     constructor(private _http: HttpClient) {
-    }
-
-    getAllUsers() {
-            return this._http.get(this.myAppUrl + 'api/UserManagement/GetAll');
+        
     }
 
     loginUser(user: UserViewModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this._http.post(this.myAppUrl + "api/User/Login", user, { headers: headers })
     }
+    getAllUsers() {
+            return this._http.get(this.myAppUrl + 'api/UserManagement/GetAll');
+    }
+
 
     saveUser(user: UserModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
