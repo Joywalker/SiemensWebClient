@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserManagementService } from '../../Services/user.management.service';
-import { UserModel } from '../../Models/user-model';
+
 declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
+import { UserModel } from '../../../Models/user-model';
+import { UserManagementService } from '../../../Services/user.management.service';
 // export for others scripts to use
 
 @Component({

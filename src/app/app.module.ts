@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from '../app/app.routing';
 
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './user/register-component/register-component';
+import { RegisterComponent } from './components/user/register-component/register-component';
+import { LoginComponent } from './components/user/login-component/login-component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { StorageManagementComponent } from './components/storage-management/storage-management.component';
 import { UserManagementService } from './Services/user.management.service';
-import { LoginComponent } from './user/login-component/login-component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
+import { StorageManagementService } from './Services/storage.management.service';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
     LoginComponent,
     LandingPageComponent,
     ForgotPasswordComponent,
+    StorageManagementComponent,
     
   ],
   imports: [
@@ -28,7 +31,7 @@ import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.
     HttpClientModule,
     routes
   ],
-  providers: [UserManagementService],
+  providers: [UserManagementService, StorageManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
