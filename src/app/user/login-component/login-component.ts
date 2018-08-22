@@ -15,11 +15,11 @@ import { $, jQuery } from 'jquery';
 export class LoginComponent implements OnInit {
 
     userLoginForm: FormGroup;
-    title: string = "Create";
     errorMessage: any;
 
     constructor(private _fb: FormBuilder,
-        private _userManagementService: UserManagementService) { }
+                private _userManagementService: UserManagementService,
+                private router: Router) { }
 
     togglePassword() {
         $(".toggle-password").click(function() {
@@ -39,26 +39,17 @@ export class LoginComponent implements OnInit {
             Password: ['', [Validators.required]],
         })
     }
+    takeme() 
+    {
+        console.log("aaa");
+        this.router.navigate(['forgot']);
+    }
 
     onSubmit() {
-        console.log(this.userLoginForm.value);
-        this.save();
-    }
-
-    save() {
-        if (!this.userLoginForm.valid) {
-            return;
-        }
-        if (this.title == "Create") {
             this._userManagementService.loginUser(this.userLoginForm.value)
                 .subscribe((data) => {
-                    console.log("AM PRIMIT ROLUL DE --> "+data);
-                }, error => this.errorMessage = error)
+                    
+                }, 
+                error => this.errorMessage = error)
         }
-    }
-
-    cancel() {
-
-    }
-
 }

@@ -7,10 +7,28 @@
   }
   
 
-.center {
+.center  {
   text-align: center;
 }
-
 .card {
   background-color: ghostwhite;
+}
+
+
+p {
+  letter-spacing: 0.5px;;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 0.8rem;
+}
+
+label, h4
+{
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+p:hover {
+  
+  transition: font-size  0.5s ease;
+  font-weight: bold;
+  color: rgb(28, 106, 158);
+  font-size: 0.85rem;
 }
