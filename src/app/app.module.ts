@@ -12,6 +12,7 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
 import { UserManagementService } from './Services/user.management.service';
 import { StorageManagementService } from './Services/storage.management.service';
+import { MapValuesPipe } from './Services/get-values-pipe';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { StorageManagementService } from './Services/storage.management.service'
     LandingPageComponent,
     ForgotPasswordComponent,
     StorageManagementComponent,
+    MapValuesPipe
     
   ],
   imports: [

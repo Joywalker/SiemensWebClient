@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { UserModel } from 'src/app/Models/user-model';
 import { UserViewModel } from '../Models/user-view-model';
+import { StorageEntryViewModel } from '../Models/storage-entry-view-model';
 
 
 
@@ -18,7 +19,7 @@ export class StorageManagementService {
 
     getAllDataFromStorage() {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this._http.get(this.myAppUrl + "api/Storage");
+        return this._http.get<Map<number, StorageEntryViewModel[]>>(this.myAppUrl + "api/Storage");
     }
     
     errorHandler(error: Response) {
