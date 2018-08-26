@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserManagementService } from '../../Services/user.management.service';
+
 declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
+import { UserManagementService } from 'src/app/Services/user.management.service';
 // export for others scripts to use
 
 @Component({
