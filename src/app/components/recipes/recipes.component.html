@@ -1,0 +1,42 @@
+<div class="container">
+  <button (click)="onAddRecipe()">Button</button>
+  <form [formGroup]="recipesFormGroup">
+    <div class="row">
+      <div class="col-md-8" formArrayName='recipes'>
+        <div class="row" *ngFor="let recipe of recipesFormGroup.get('recipes').controls; let i = index" [formGroupName]="i">
+          <div class="col-sm-4">
+            <label for="feedstockID">Material</label>
+            <select class="form-control" formControlName="FeedStock">
+              <option value="Potatoes">Cartofi</option>
+              <option value="Oil">Ulei</option>
+              <option value="Salt">Sare</option>
+              <option value="Condiments">Arome</option>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <label for="quantityID">Quantity</label>
+            <input class="form-control" id="quantityID" type="number" formControlName="Quantity">
+          </div>
+          <div class="col-sm-2">
+            <label for="measurementID">Unit</label>
+            <select class="form-control" id="measurementID" formControlName="Measurement">
+              <option value="kg">kg</option>
+              <option value="g">g</option>
+              <option value="mg">mg</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <label for="actionID">Action</label>
+            <select [(ngModel)]="selectedValue" id="actionID" class="form-control" >
+                <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+              </select>
+            <div *ngIf="displayTimeSelector">
+              <input type="time" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <br>
+</div>

@@ -5,6 +5,7 @@ import { LoginComponent } from './components/user/login-component/login-componen
 import { RegisterComponent } from './components/user/register-component/register-component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
+import { RecipesComponent } from './components/recipes/recipes.component';
 
 
 
@@ -14,6 +15,7 @@ export const router: Routes = [
     { path: 'register' , component: RegisterComponent},
     { path: 'login/forgotPassword' , component: ForgotPasswordComponent},
     { path: 'storage' , component: StorageManagementComponent},
+    { path: 'recipe/add', component: RecipesComponent}
     
 ];
 
