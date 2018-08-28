@@ -1,15 +1,15 @@
 <div class="container">
   <br>
-  <button class="btn btn-dark" (click)="onAddRecipe()">Add Material</button>
+  <button class="btn btn-dark" (click)="addIngredient()">Add Ingredient</button>
   <form [formGroup]="recipesFormGroup">
     <hr>
     <div class="row">
       <div class="col-sm-8" formArrayName='ingredients'>
-        <div class="row" *ngFor="let recipe of recipesFormGroup.get('ingredients').controls; let i = index" [formGroupName]="i">
-          <div class="col-sm-3">
+        <div class="row form-group form-horizontal" *ngFor="let recipe of recipesFormGroup.get('ingredients').controls; let i = index" [formGroupName]="i">
+          <div class="col-sm-4">
             <label for="feedstockID">Material {{i+1}}</label>
             <select class="form-control" formControlName="FeedStock">
-              <option *ngFor="let material of recipeMaterialsArray" [value]="material.value" selected>{{material}}</option>
+              <option *ngFor="let material of recipeMaterialsArray" [ngValue]="material" selected>{{material}}</option>
             </select>
           </div>
           <div class="col-sm-2">
@@ -19,12 +19,12 @@
           <div class="col-sm-2">
             <label for="measurementID">Unit</label>
             <select class="form-control" id="measurementID" formControlName="Measurement">
-              <option *ngFor="let measurement of recipeMeasurementUnitsArray" [value]="measurement.value">{{measurement}}</option>
+              <option *ngFor="let measurement of recipeMeasurementUnitsArray" [ngValue]="measurement">{{measurement}}</option>
             </select>
           </div>
           <div class="col-sm-2">
             <label for="deletebuttonID">Remove</label>
-            <button class="btn btn-danger fa fa-minus" (click)="deleteRowAt(i)" id="deletebuttonID"></button>
+            <button class="btn btn-danger fa fa-minus" (click)="deleteRowAt(i,'ingredient')" id="deletebuttonID"></button>
           </div>
         </div>
       </div>
@@ -32,60 +32,41 @@
     <hr>
     <div class="row">
       <div class="col-lg-12">
-        <button class="btn btn-primary" (click)="showActionList = !showActionList">Next Step</button>
+        <button class="btn btn-primary" (click)="addAction()">Add Action</button>
       </div>
     </div>
-
     <br>
-    <div class="row" *ngIf="showActionList">
-      <div class="col-md-8">
-        <div class="row">
-          <div class="col-sm-4">
-            <label for="actionID">Action</label>
-            <select id="actionID" class="form-control">
-              <option *ngFor="let option of recipeActionsArray" [value]="option.value">{{option}}</option>
-            </select>
-          </div>
-          <div class="col-sm-2">
-            <label for="timeValueID">Duration</label>
-            <input type="number" class="form-control" id="timeValueID" min="0">
-          </div>
-          <div class="col-sm-3">
-            <label for="timeUnitID">Unit</label>
-            <select id="timeUnitID" class="form-control">
-              <option *ngFor="let option of recipeActionsTimeUnitsArray" [value]="option.value">{{option}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row" *ngIf="showActionList">
-      <div class="col-md-8" formArrayName="actions">
-        <div class="row">
+    <div class="row">
+      <div class="col-sm-8" formArrayName='actions'>
+        <div class="row" *ngFor="let action of recipesFormGroup.get('actions').controls; let i = index" [formGroupName]="i">
           <div class="col-sm-4">
             <label for="actionID">Action</label>
             <select formControlName="ActionName" id="actionID" class="form-control">
-              <option *ngFor="let option of recipeActionsArray" [value]="option.value">{{option}}</option>
+              <option *ngFor="let option of recipeActionsArray" [ngValue]="option">{{option}}</option>
             </select>
           </div>
           <div class="col-sm-2">
             <label for="timeValueID">Duration</label>
             <input formControlName="ActionTime" type="number" class="form-control" id="timeValueID" min="0">
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <label for="timeUnitID">Unit</label>
-            <select formControlName="FeedStock" id="timeUnitID" class="form-control">
-              <option *ngFor="let option of recipeActionsTimeUnitsArray" [value]="option.value">{{option}}</option>
+            <select formControlName="ActionTimeUnit" id="timeUnitID" class="form-control">
+              <option *ngFor="let option of recipeActionsTimeUnitsArray" [ngValue]="option">{{option}}</option>
             </select>
+          </div>
+          <div class="col-sm-2">
+            <label for="deletebuttonID">Remove</label>
+            <button class="btn btn-danger fa fa-minus" (click)="deleteRowAt(i,'action')" id="deletebuttonID"></button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   </form>
   <br>
-  <div class="row" *ngIf="showActionList">
-    <div class="col-lg-12">
-      <button class="btn btn-outline-success" (click)="finishRecipe()">Finish</button>
+  <div class="row">
+    <div class="col-lg-12 ">
+      <button class="btn btn-outline-success " (click)="finishRecipe() ">Finish</button>
     </div>
   </div>
   <hr>

@@ -15,6 +15,7 @@ import { StorageManagementComponent } from './components/storage-management/stor
 import { UserManagementService } from './Services/user.management.service';
 import { StorageManagementService } from './Services/storage.management.service';
 import { RecipesComponent } from './components/recipes/recipes.component';
+import { RecipeManagementService } from './Services/recipe-management-service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { RecipesComponent } from './components/recipes/recipes.component';
     HttpClientModule,
     routes
   ],
-  providers: [UserManagementService, StorageManagementService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
