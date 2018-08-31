@@ -5,30 +5,28 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { UserModel } from 'src/app/Models/user-model';
 import { UserViewModel } from '../Models/user-view-model';
-
+import { URLMapper } from '../app.urlmapping';
 
 
 @Injectable()
 export class UserManagementService {
-
-    myAppUrl: string = "http://localhost:50161/";
     constructor(private _http: HttpClient) {
         
     }
 
     loginUser(user: UserViewModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this._http.post(this.myAppUrl + "api/User/Login", user, { headers: headers })
+        return this._http.post(URLMapper.API_URL + URLMapper.API_LOGIN_USER_URL_PATH, user, { headers: headers })
     }
     getAllUsers() {
-            return this._http.get(this.myAppUrl + 'api/UserManagement/GetAll');
+            return this._http.get(URLMapper.API_URL  + 'api/UserManagement/GetAll');
     }
 
 
     saveUser(user: UserModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         let body = user.Username+ ":" +user.Password;
-        return this._http.post(this.myAppUrl + "api/User/Login", body, { headers: headers })
+        return this._http.post(URLMapper.API_URL + URLMapper.API_REGISTER_USER_URL_PATH, body, { headers: headers })
     }
 
     errorHandler(error: Response) {

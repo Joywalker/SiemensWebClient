@@ -5,4 +5,5 @@ export class URLMapper {
     public static get API_GET_STORAGE_STATUS_URL_PATH(): string { return "api/Storage"; }
     public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/EditStorage"; }
     public static get API_LOGIN_USER_URL_PATH(): string { return "api/User/Login"; }
+    public static get API_REGISTER_USER_URL_PATH(): string { return "api/User/Register"; }
 }
