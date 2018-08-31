@@ -11,10 +11,11 @@ import { RecipeManagementService } from '../../Services/recipe-management-servic
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
+  @Input() recipeName: String;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
   recipeMeasurementUnitsArray = ['kg', 'g', 'mg'];
-  recipeActionsTimeUnitsArray = ['min', 'hours', 'days'];
+  recipeActionsTimeUnitsArray = ['min', 'hours', 'days','sec'];
   ingredientsArray = new FormArray([]);
   actionsArray = new FormArray([]);
   recipesFormGroup: FormGroup;
@@ -93,7 +94,7 @@ export class RecipesComponent implements OnInit {
   buildRecipe() {
     var ing = this.extractIngredientsFromForm();
     var act = this.extractActionsFromForm();
-    return new RecipeViewModel(ing, act);
+    return new RecipeViewModel(this.recipeName,ing, act);
   }
 
   finishRecipe() {

@@ -7,13 +7,13 @@ import { RecipeViewModel } from '../Models/Recipe/recipe-view-model';
 
 @Injectable()
 export class RecipeManagementService {
-
     myAppUrl: string = "http://localhost:50161/";
     constructor(private _http: HttpClient) {
         
     }
     sendRecipe(recipe: RecipeViewModel) {
+        console.log(recipe);
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this._http.post(this.myAppUrl + "api/Recipe/Add", recipe, { headers: headers })
+        return this._http.post(this.myAppUrl + "recipe/add", recipe, { headers: headers })
     }
 }

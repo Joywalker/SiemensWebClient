@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     onSubmit() {
             this._userManagementService.loginUser(this.userLoginForm.value)
                 .subscribe((data) => {
-                    
+                    console.log(data);
                 }, 
                 error => this.errorMessage = error)
         }

@@ -5,11 +5,13 @@ import { Action } from "rxjs/internal/scheduler/Action";
 export class RecipeViewModel {
     private Ingredients: Ingredient[];
     private Actions: RecipeAction[];
+    private RecipeName: String = "Default";
 
-    constructor(ingredients: Ingredient[], actions: RecipeAction[])
+    constructor(name: String, ingredients: Ingredient[], actions: RecipeAction[])
     {
         this.Ingredients = ingredients;
         this.Actions = actions;
+        this.RecipeName = name;
     }
     get ingredients(): Ingredient[] {
         return this.Ingredients;

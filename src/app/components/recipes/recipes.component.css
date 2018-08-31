@@ -7,3 +7,13 @@
     border-radius: 1rem;
 }
       
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#RecipeNameID:invalid 
+{
+    border: 2px red;
+}
