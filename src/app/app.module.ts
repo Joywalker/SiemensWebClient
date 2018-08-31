@@ -14,8 +14,10 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
 import { UserManagementService } from './Services/user.management.service';
 import { StorageManagementService } from './Services/storage.management.service';
-import { RecipesComponent } from './components/recipes/recipes.component';
 import { RecipeManagementService } from './Services/recipe-management-service';
+import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
+import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
+
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { RecipeManagementService } from './Services/recipe-management-service';
     ForgotPasswordComponent,
     StorageManagementComponent,
     MapValuesPipe,
-    RecipesComponent
+    RecipeAddComponent,
+    RecipeViewComponent
     
   ],
   imports: [

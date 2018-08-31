@@ -1,16 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { RecipeViewModel } from '../../Models/Recipe/recipe-view-model'
-import { Ingredient } from '../../Models/Recipe/ingredient-view-model'
-import { RecipeAction } from '../../Models/Recipe/action-view-model'
-import { RecipeManagementService } from '../../Services/recipe-management-service';
+import { RecipeManagementService } from '../../../Services/recipe-management-service';
+import { isBoolean } from 'util';
+import { RecipeAction } from '../../../Models/Recipe/action-view-model';
+import { Ingredient } from '../../../Models/Recipe/ingredient-view-model';
+import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 
 @Component({
   selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  templateUrl: './recipe-add.component.html',
+  styleUrls: ['./recipe-add.component.css']
 })
-export class RecipesComponent implements OnInit {
+export class RecipeAddComponent implements OnInit {
   @Input() recipeName: String;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
@@ -60,7 +61,6 @@ export class RecipesComponent implements OnInit {
       }
     }
   }
-
   // getting the actions from form and storing in an local array
   extractActionsFromForm() {
     var Actions: RecipeAction[] = new Array();
@@ -99,9 +99,14 @@ export class RecipesComponent implements OnInit {
 
   finishRecipe() {
     var recipe = this.buildRecipe();
-    console.log(recipe);
     this._recipeManagementService.sendRecipe(recipe).subscribe(response => {
-      console.log(response);
+      if(response.isPrototypeOf(isBoolean))
+      {
+        alert('Recipe added succesfull');
+      }else {
+        alert('ERROR : check console');
+        console.log(response);
+      }
     })
   }
 }

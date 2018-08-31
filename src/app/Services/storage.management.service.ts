@@ -3,8 +3,6 @@ import { Response, Http, } from '@angular/http';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { UserModel } from 'src/app/Models/user-model';
-import { UserViewModel } from '../Models/user-view-model';
 import { StorageEntryViewModel } from '../Models/storage-entry-view-model';
 
 
