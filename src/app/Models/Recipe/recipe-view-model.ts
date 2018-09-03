@@ -3,9 +3,9 @@ import { RecipeAction } from "./action-view-model";
 import { Action } from "rxjs/internal/scheduler/Action";
 
 export class RecipeViewModel {
-    private Ingredients: Ingredient[];
-    private Actions: RecipeAction[];
-    private RecipeName: String = "Default";
+    public Ingredients: Ingredient[];
+    public Actions: RecipeAction[];
+    public RecipeName: String;
 
     constructor(name: String, ingredients: Ingredient[], actions: RecipeAction[])
     {
@@ -21,6 +21,10 @@ export class RecipeViewModel {
         return this.Actions;
     }
 
+    get recipeName(): String {
+        return this.RecipeName;
+    }
+
     set ingredients(ingredientsArray: Ingredient[])
     {
         this.Ingredients = ingredientsArray;
@@ -30,4 +34,10 @@ export class RecipeViewModel {
     {
         this.Actions = actionsArray;
     }
+
+    set recipeName(name: String)
+    {
+        this.RecipeName = name;
+    }
+    
 }

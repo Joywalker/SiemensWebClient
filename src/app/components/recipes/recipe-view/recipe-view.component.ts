@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeManagementService } from '../../../Services/recipe-management-service';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-view',
@@ -10,12 +11,21 @@ import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 export class RecipeViewComponent implements OnInit {
 
   recipesList : RecipeViewModel[];
-  constructor(private recipeManagementService: RecipeManagementService) { }
+  recipe: RecipeViewModel;
+  isReady : boolean = false;
+  constructor(private recipeManagementService: RecipeManagementService,
+              private router: Router) { }
 
   ngOnInit() {
     this.recipeManagementService.getAllRecipes().subscribe(data => {
-      this.recipesList = data;
-      console.log(this.recipesList);
+      this.recipeManagementService.recipesList = data;
+      this.recipesList = this.recipeManagementService.recipesList;
+      this.isReady = true;
     });
+  }
+
+  editRecipe(recipeName)
+  {
+    this.router.navigateByUrl("/recipe/add/"+recipeName);
   }
 }

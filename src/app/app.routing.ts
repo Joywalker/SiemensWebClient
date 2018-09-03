@@ -17,6 +17,7 @@ export const router: Routes = [
     { path: 'login/forgotPassword' , component: ForgotPasswordComponent},
     { path: 'storage' , component: StorageManagementComponent},
     { path: 'recipe/add', component: RecipeAddComponent},
+    { path: 'recipe/add/:id', component: RecipeAddComponent},
     { path: 'recipe/get', component: RecipeViewComponent}
     
 ];

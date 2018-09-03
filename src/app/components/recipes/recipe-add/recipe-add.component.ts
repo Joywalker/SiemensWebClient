@@ -5,6 +5,7 @@ import { isBoolean } from 'util';
 import { RecipeAction } from '../../../Models/Recipe/action-view-model';
 import { Ingredient } from '../../../Models/Recipe/ingredient-view-model';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -13,21 +14,51 @@ import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 })
 export class RecipeAddComponent implements OnInit {
   @Input() recipeName: String;
+  recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
   recipeMeasurementUnitsArray = ['kg', 'g', 'mg'];
-  recipeActionsTimeUnitsArray = ['min', 'hours', 'days','sec'];
+  recipeActionsTimeUnitsArray = ['min', 'hours', 'days', 'sec'];
   ingredientsArray = new FormArray([]);
   actionsArray = new FormArray([]);
   recipesFormGroup: FormGroup;
+  private sub: any;
+
   constructor(private _fb: FormBuilder,
-    private _recipeManagementService: RecipeManagementService) { }
+    private _recipeManagementService: RecipeManagementService,
+    private _routeConfigService: ActivatedRoute,
+    private _router: Router) { }
 
   ngOnInit() {
     this.recipesFormGroup = new FormGroup({
       'ingredients': this.ingredientsArray,
       'actions': this.actionsArray
     })
+    this.sub = this._routeConfigService.params.subscribe(params => {
+      var id = params['id'];
+      if (id != null || id != '') {
+        var recipe = this._recipeManagementService.getRecipeByID(id);
+        this.recipeName = recipe.RecipeName;
+        if (recipe != null) {
+          recipe.Ingredients.forEach(ingredient => {
+            this.ingredientsArray.push(
+              new FormGroup({
+                'FeedStock': new FormControl(ingredient.IngredientName, Validators.required),
+                'Quantity': new FormControl(ingredient.Quantity, Validators.required),
+                'Measurement': new FormControl(ingredient.MeasurementUnit, Validators.required),
+              }))
+          });
+          recipe.Actions.forEach(action => {
+            this.actionsArray.push(
+              new FormGroup({
+                'ActionName': new FormControl(action.ActionName, Validators.required),
+                'ActionTime': new FormControl(action.Duration, Validators.required),
+                'ActionTimeUnit': new FormControl(action.TimeMeasurementUnit, Validators.required),
+              }))
+          });
+        }
+      }
+    });
   }
 
   addIngredient() {
@@ -94,19 +125,24 @@ export class RecipeAddComponent implements OnInit {
   buildRecipe() {
     var ing = this.extractIngredientsFromForm();
     var act = this.extractActionsFromForm();
-    return new RecipeViewModel(this.recipeName,ing, act);
+    return new RecipeViewModel(this.recipeName, ing, act);
   }
 
   finishRecipe() {
     var recipe = this.buildRecipe();
     this._recipeManagementService.sendRecipe(recipe).subscribe(response => {
-      if(response.isPrototypeOf(isBoolean))
-      {
+      if (response == true) {
         alert('Recipe added succesfull');
-      }else {
+      } else {
         alert('ERROR : check console');
         console.log(response);
       }
+    })
+  }
+
+  deleteRecipe(recipeName) {
+    this._recipeManagementService.deleteRecipeByID(this.recipeName).subscribe(response => {
+      this._router.navigateByUrl("/recipe/get")
     })
   }
 }
