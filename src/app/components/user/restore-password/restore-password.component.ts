@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PasswordValidator } from '../../../Models/password-validator';
-<<<<<<< HEAD
-import { ActivatedRoute, Router } from '@angular/router';
-=======
 import { ActivatedRoute } from '@angular/router';
->>>>>>> a56c50629850f7937c1239546bba9369b3f9a36a
 import { UserManagementService } from '../../../Services/user.management.service';
 
 @Component({
@@ -19,10 +15,6 @@ export class RestorePasswordComponent implements OnInit {
   restorePasswordForm: FormGroup;
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-<<<<<<< HEAD
-              private router: Router,
-=======
->>>>>>> a56c50629850f7937c1239546bba9369b3f9a36a
               private _userManagementService : UserManagementService) {
 
     this.restorePasswordForm = fb.group({
@@ -38,14 +30,7 @@ export class RestorePasswordComponent implements OnInit {
   onSubmit() {
       let password = this.restorePasswordForm.get('password').value;
       this._userManagementService.updatePasswordForUserWith(this.cnpTempVal, password).subscribe(response => {
-<<<<<<< HEAD
-        if(response)
-        {
-          this.router.navigateByUrl("user/login");
-        }
-=======
         console.log(response);
->>>>>>> a56c50629850f7937c1239546bba9369b3f9a36a
       })
   }
 
