@@ -16,6 +16,7 @@ export class ForgotPasswordComponent implements OnInit {
               private _userManagementService: UserManagementService,
               private router: Router) { }
 
+<<<<<<< Updated upstream
               ngOnInit() {
                 this.forgotPasswordForm = this._fb.group({
                     CNP: ['', [Validators.required, Validators.pattern('[0-9]')]],
@@ -24,4 +25,24 @@ export class ForgotPasswordComponent implements OnInit {
                     LastName: ['', [Validators.required]],
                 })
             }
+=======
+  ngOnInit() {
+    this.forgotPasswordForm = this._fb.group({
+      CNP: ['', [Validators.required, Validators.pattern('[0-9]{13}')]],
+      EmployeeID: ['', [Validators.required, Validators.pattern('[0-9a-zA-z]{8}')]],
+      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
+      LastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
+    })
+  }
+
+  onSubmit() 
+  {
+    this._userManagementService.checkIfUserExists(this.forgotPasswordForm.value).subscribe(response => {
+      if(response != "" && response != null)
+      {
+        this.router.navigate(["user/forgotPassword/restore",{cnp: response, skipLocationChange: true}]);
+      }
+    })
+  }
+>>>>>>> Stashed changes
 }
