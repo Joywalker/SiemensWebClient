@@ -6,6 +6,7 @@ declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserManagementService } from 'src/app/Services/user.management.service';
+import { PermissionsEnum } from '../../../Models/user-rights-enums';
 // export for others scripts to use
 
 @Component({
@@ -19,38 +20,37 @@ export class LoginComponent implements OnInit {
     errorMessage: any;
 
     constructor(private _fb: FormBuilder,
-                private _userManagementService: UserManagementService,
-                private router: Router) { }
+        private _userManagementService: UserManagementService,
+        private router: Router) { }
 
     togglePassword() {
-        $(".toggle-password").click(function() {
-
+        $(".toggle-password").click(function () {
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $($(this).attr("toggle"));
             if (input.attr("type") == "password") {
-              input.attr("type", "text");
+                input.attr("type", "text");
             } else {
-              input.attr("type", "password");
+                input.attr("type", "password");
             }
-          });
-}
+        });
+    }
     ngOnInit() {
         this.userLoginForm = this._fb.group({
             Username: ['', [Validators.required]],
             Password: ['', [Validators.required]],
         })
     }
-    takeme() 
-    {
+    takeme() {
         console.log("aaa");
         this.router.navigate(['forgot']);
     }
 
     onSubmit() {
-            this._userManagementService.loginUser(this.userLoginForm.value)
-                .subscribe((data) => {
-                    console.log(data);
-                }, 
+        this._userManagementService.loginUser(this.userLoginForm.value)
+            .subscribe((data) => {
+                var x = Object.values(data);
+                console.log((x as PermissionsEnum[]).toString());
+            },
                 error => this.errorMessage = error)
-        }
+    }
 }

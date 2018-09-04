@@ -142,7 +142,12 @@ export class RecipeAddComponent implements OnInit {
 
   deleteRecipe(recipeName) {
     this._recipeManagementService.deleteRecipeByID(this.recipeName).subscribe(response => {
-      this._router.navigateByUrl("/recipe/get")
+      if (response) {
+        this._router.navigateByUrl("/recipe/get");
+      } else {
+        alert("ERROR");
+        console.log(response);
+      }
     })
   }
 }
