@@ -1,0 +1,25 @@
+<div class="table-responsive">
+    <table class="table" *ngFor="let recipe of recipesList">
+        <thead class="thead-light">
+            <button class="btn btn-dark" (click)="editRecipe(recipe.RecipeName)">{{recipe.RecipeName}}</button>
+            <hr>
+            <tr>
+                <th scope="col">Ingredient Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Measurement unit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ingredient of recipe.Ingredients">
+                <td class="recipeIngredient">{{ingredient.IngredientName}}</td>
+                <td>{{ingredient.Quantity}}</td>
+                <td>{{ingredient.MeasurementUnit}}</td>
+            </tr>
+            <tr *ngFor="let action of recipe.Actions">
+                <td class="recipeAction">{{action.ActionName}}</td>
+                <td>{{action.Duration}}</td>
+                <td>{{action.TimeMeasurementUnit}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

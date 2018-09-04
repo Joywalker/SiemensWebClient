@@ -5,15 +5,22 @@ import { LoginComponent } from './components/user/login-component/login-componen
 import { RegisterComponent } from './components/user/register-component/register-component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
+import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
+import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
+import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 
 
 
 export const router: Routes = [
     { path: 'welcome' , component: LandingPageComponent},
-    { path: 'login' , component: LoginComponent},
+    { path: 'user/login' , component: LoginComponent},
     { path: 'register' , component: RegisterComponent},
-    { path: 'login/forgotPassword' , component: ForgotPasswordComponent},
+    { path: 'user/forgotPassword' , component: ForgotPasswordComponent},
     { path: 'storage' , component: StorageManagementComponent},
+    { path: 'recipe/add', component: RecipeAddComponent},
+    { path: 'recipe/add/:id', component: RecipeAddComponent},
+    { path: 'recipe/get', component: RecipeViewComponent},
+    { path: 'user/forgotPassword/restore', component: RestorePasswordComponent}
     
 ];
 

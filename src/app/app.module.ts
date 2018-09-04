@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from '../app/app.routing';
 
+import { MapValuesPipe } from './Services/get-values-pipe';
+
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/user/register-component/register-component';
 import { LoginComponent } from './components/user/login-component/login-component';
@@ -12,7 +14,11 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
 import { UserManagementService } from './Services/user.management.service';
 import { StorageManagementService } from './Services/storage.management.service';
-import { MapValuesPipe } from './Services/get-values-pipe';
+import { RecipeManagementService } from './Services/recipe-management-service';
+import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
+import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
+import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
+
 
 
 @NgModule({
@@ -23,7 +29,10 @@ import { MapValuesPipe } from './Services/get-values-pipe';
     LandingPageComponent,
     ForgotPasswordComponent,
     StorageManagementComponent,
-    MapValuesPipe
+    MapValuesPipe,
+    RecipeAddComponent,
+    RecipeViewComponent,
+    RestorePasswordComponent
     
   ],
   imports: [
@@ -33,7 +42,7 @@ import { MapValuesPipe } from './Services/get-values-pipe';
     HttpClientModule,
     routes
   ],
-  providers: [UserManagementService, StorageManagementService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,19 @@
+.container:hover {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2rem;
+    background-color: rgb(202, 203, 204);
+    transition:background-color 5s;
+    border-radius: 1rem;
+}
+      
+.col-centered{
+    float: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#RecipeNameID:invalid 
+{
+    border: 2px red;
+}
