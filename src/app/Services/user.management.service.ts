@@ -8,7 +8,6 @@ import { UserViewModel } from '../Models/user-view-model';
 import { URLMapper } from '../app.urlmapping';
 import { UserRestorePasswordViewModel } from '../Models/user-password-restore-view-model';
 
-
 @Injectable()
 export class UserManagementService implements OnDestroy {
     constructor(private _http: HttpClient) { }
@@ -16,9 +15,6 @@ export class UserManagementService implements OnDestroy {
     loginUser(user: UserViewModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this._http.post(URLMapper.API_URL + URLMapper.API_LOGIN_USER_URL_PATH, user, { headers: headers })
-    }
-    getAllUsers() {
-        return this._http.get(URLMapper.API_URL + 'api/UserManagement/GetAll');
     }
     
     saveUser(user: UserModel) {

@@ -7,6 +7,7 @@ declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserManagementService } from 'src/app/Services/user.management.service';
 import { PermissionsEnum } from '../../../Models/user-rights-enums';
+
 // export for others scripts to use
 
 @Component({

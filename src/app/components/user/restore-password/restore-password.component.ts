@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { PasswordValidator } from '../../../Models/password-validator';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserManagementService } from '../../../Services/user.management.service';
+import { PasswordValidator } from '../../../Models/password-validator';
 
 @Component({
   selector: 'app-restore-password',
@@ -15,6 +15,7 @@ export class RestorePasswordComponent implements OnInit {
   restorePasswordForm: FormGroup;
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
+              private router: Router,
               private _userManagementService : UserManagementService) {
 
     this.restorePasswordForm = fb.group({
@@ -30,7 +31,10 @@ export class RestorePasswordComponent implements OnInit {
   onSubmit() {
       let password = this.restorePasswordForm.get('password').value;
       this._userManagementService.updatePasswordForUserWith(this.cnpTempVal, password).subscribe(response => {
-        console.log(response);
+        if(response)
+        {
+          this.router.navigateByUrl("user/login");
+        }
       })
   }
 
