@@ -6,7 +6,8 @@ declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserManagementService } from 'src/app/Services/user.management.service';
-import { PermissionsEnum } from '../../../Models/user-rights-enums';
+import { PermissionsEnum, UserTypes } from '../../../Models/user-rights-enums';
+import { AuthService } from '../../../Services/auth-service';
 
 // export for others scripts to use
 
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private _fb: FormBuilder,
         private _userManagementService: UserManagementService,
+        private _auth: AuthService,
         private router: Router) { }
 
     togglePassword() {
@@ -41,17 +43,15 @@ export class LoginComponent implements OnInit {
             Password: ['', [Validators.required]],
         })
     }
-    takeme() {
-        console.log("aaa");
-        this.router.navigate(['forgot']);
-    }
-
     onSubmit() {
-        this._userManagementService.loginUser(this.userLoginForm.value)
-            .subscribe((data) => {
-                var x = Object.values(data);
-                console.log((x as PermissionsEnum[]).toString());
-            },
-                error => this.errorMessage = error)
+        if (this.userLoginForm.valid) {
+            this._userManagementService.loginUser(this.userLoginForm.value)
+                .subscribe((data) => {
+                    this._auth.sendToken(this.userLoginForm.value.Password)
+                    this._userManagementService.setUserTypeAndPermissions(data);
+                    this.router.navigateByUrl('welcome');
+                },
+                    error => this.errorMessage = error)
+        }
     }
 }

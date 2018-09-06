@@ -1,1 +1,15 @@
-<app-landing-page></app-landing-page>
+<nav class="navbar navbar-dark bg-dark navbar-static-top">
+    <div class="navbar-expand ml-auto navbar-nav">
+        <div class="navbar navbar-brand pull-left">
+            <a class="nav-item">Automation Line</a>
+        </div>
+        <div class="navbar-nav">
+            <a href class="nav-item nav-link" *ngIf="!auth.isLoggednIn()" [routerLink]="['user/login']"><i class="fa fa-user">
+                    Login</i></a>
+            <a href class="nav-item nav-link" *ngIf="auth.isLoggednIn()" (click)="auth.logout()"><i class="fa fa-user"> Logout</i></a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>

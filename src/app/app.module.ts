@@ -3,6 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from '../app/app.routing';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { SidebarModule } from 'ng-sidebar';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './Services/auth-service';
 
 import { MapValuesPipe } from './Services/get-values-pipe';
 
@@ -33,16 +39,23 @@ import { RestorePasswordComponent } from './components/user/restore-password/res
     RecipeAddComponent,
     RecipeViewComponent,
     RestorePasswordComponent
-    
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    routes
+    routes,
+    MatSidenavModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    SidebarModule.forRoot(),
+
+
   ],
-  providers: [UserManagementService, StorageManagementService, RecipeManagementService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService, AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

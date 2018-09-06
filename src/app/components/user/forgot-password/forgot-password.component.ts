@@ -19,19 +19,6 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { }
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-              ngOnInit() {
-                this.forgotPasswordForm = this._fb.group({
-                    CNP: ['', [Validators.required, Validators.pattern('[0-9]')]],
-                    ID: ['', [Validators.required]],
-                    FirstName: ['', [Validators.required]],
-                    LastName: ['', [Validators.required]],
-                })
-            }
-=======
-=======
->>>>>>> a56c50629850f7937c1239546bba9369b3f9a36a
   ngOnInit() {
     this.forgotPasswordForm = this._fb.group({
       CNP: ['', [Validators.required, Validators.pattern('[0-9]{13}')]],
@@ -46,16 +33,8 @@ export class ForgotPasswordComponent implements OnInit {
     this._userManagementService.checkIfUserExists(this.forgotPasswordForm.value).subscribe(response => {
       if(response != "" && response != null)
       {
-<<<<<<< HEAD
         this.router.navigate(["user/forgotPassword/restore",{cnp: response, skipLocationChange: true}]);
       }
     })
   }
->>>>>>> Stashed changes
-=======
-        this.router.navigate(["user/forgotPassword/restore",{cnp: response}]);
-      }
-    })
-  }
->>>>>>> a56c50629850f7937c1239546bba9369b3f9a36a
 }

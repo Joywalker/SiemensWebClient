@@ -1,8 +1,8 @@
 export enum UserTypes
 {
-    ADMIN,
-    OPERATOR,
-    ENGINEER
+    "ADMIN",
+    "OPERATOR",
+    "ENGINEER"
 }
 
 export enum PermissionsEnum
