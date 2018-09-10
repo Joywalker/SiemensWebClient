@@ -4,7 +4,6 @@ export class URLMapper {
     public static get API_GET_RECIPES_URL_PATH(): string { return "api/recipe/get"; }
     public static get API_DELETE_RECIPE_BY_ID(): string  { return "api/recipe/delete"; }
     public static get API_GET_STORAGE_STATUS_URL_PATH(): string { return "api/Storage"; }
-<<<<<<< HEAD
     public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/editStorage"; }
     public static get API_LOGIN_USER_URL_PATH(): string { return "api/user/login"; }
     public static get API_CHECK_IF_USER_EXISTS(): string { return "api/user/recover"; }
@@ -12,8 +11,4 @@ export class URLMapper {
     public static get API_REGISTER_NEW_USER(): string { return "api/user/register"; }
     public static get API_GET_ALL_USERS(): string { return "api/user/all"; }
     public static get API_GET_USER_RIGHTS(): string { return "api/user/getPermissions"; }
-=======
-    public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/EditStorage"; }
-    public static get API_LOGIN_USER_URL_PATH(): string { return "api/User/Login"; }
->>>>>>> feature/Client-002.RecipesManagement
 }

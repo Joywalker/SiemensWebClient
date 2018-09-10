@@ -21,9 +21,9 @@
                     Storage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">View Feedstock</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">Storage View</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">Storage Edit</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Feedstock</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Storage Edit</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
@@ -42,7 +42,7 @@
                 </a>
                 <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">View Orders</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">Place Order</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Place Order</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
@@ -50,8 +50,8 @@
                     Stock
                 </a>
                 <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">View Stock Graph</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator() " href="#">View Stock</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" >View Stock Graph</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Stock</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="auth.isUserAdmin()">
@@ -59,7 +59,7 @@
                         Users
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" [routerLink]="['register']" href="#">Add new User</a>
+                        <a class="dropdown-item" [routerLink]="['register']">Add new User</a>
                     </div>
                 </li>
         </ul>
