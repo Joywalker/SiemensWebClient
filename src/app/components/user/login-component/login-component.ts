@@ -6,12 +6,9 @@ declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserManagementService } from 'src/app/Services/user.management.service';
-<<<<<<< HEAD
 import { AuthService } from '../../../Services/auth-service';
 import { PermissionsEnum } from '../../../Models/user-rights-enums';
 
-=======
->>>>>>> feature/Client-002.RecipesManagement
 // export for others scripts to use
 
 @Component({
@@ -26,14 +23,9 @@ export class LoginComponent implements OnInit {
     invalidCredentialMsg: string;
 
     constructor(private _fb: FormBuilder,
-<<<<<<< HEAD
         private _userManagementService: UserManagementService,
         private _auth: AuthService,
         private router: Router) { }
-=======
-                private _userManagementService: UserManagementService,
-                private router: Router) { }
->>>>>>> feature/Client-002.RecipesManagement
 
     togglePassword() {
         $(".toggle-password").click(function() {
@@ -53,7 +45,6 @@ export class LoginComponent implements OnInit {
             Password: ['', [Validators.required]],
         })
     }
-<<<<<<< HEAD
     onSubmit() {
         let uname = this.userLoginForm.get('Username').value;
         let pwd = this.userLoginForm.get('Password').value;
@@ -70,19 +61,3 @@ export class LoginComponent implements OnInit {
             })
     }
 }
-=======
-    takeme() 
-    {
-        console.log("aaa");
-        this.router.navigate(['forgot']);
-    }
-
-    onSubmit() {
-            this._userManagementService.loginUser(this.userLoginForm.value)
-                .subscribe((data) => {
-                    console.log(data);
-                }, 
-                error => this.errorMessage = error)
-        }
-}
->>>>>>> feature/Client-002.RecipesManagement
