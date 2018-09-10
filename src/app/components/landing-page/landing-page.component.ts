@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AuthService } from '../../Services/auth-service';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService) { 
+  
+  }
 
   ngOnInit() {
   }

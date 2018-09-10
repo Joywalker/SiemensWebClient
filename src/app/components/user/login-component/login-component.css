@@ -32,3 +32,8 @@ p:hover {
   color: rgb(28, 106, 158);
   font-size: 0.85rem;
 }
+
+.div-center{
+  margin: 0 auto;
+  width:30% /* value of your choice which suits your alignment */
+}

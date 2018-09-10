@@ -18,6 +18,7 @@ export class RecipeViewComponent implements OnInit {
 
   ngOnInit() {
     this.recipeManagementService.getAllRecipes().subscribe(data => {
+      console.log(data);
       this.recipeManagementService.recipesList = data;
       this.recipesList = this.recipeManagementService.recipesList;
       this.isReady = true;
@@ -26,6 +27,6 @@ export class RecipeViewComponent implements OnInit {
 
   editRecipe(recipeName)
   {
-    this.router.navigateByUrl("/recipe/add/"+recipeName);
+    this.router.navigateByUrl("/recipe/edit/"+recipeName);
   }
 }

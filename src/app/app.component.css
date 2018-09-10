@@ -1,5 +1,8 @@
-.navbar-header {
-    text-align: center;
-    width: 100%;
+.container {
+    margin-top: 2rem;
 }
-.navbar-brand {float:none;}
+span {
+    font-size: 0.7rem;
+    color: blanchedalmond;
+    text-align: center;
+}

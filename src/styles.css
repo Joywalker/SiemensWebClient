@@ -2,3 +2,14 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow');
+
+.ng-sidebar {
+    background: red;
+    width: 13rem;
+}
+
+.ng-sidebar--right {
+    color: red !important;
+    background: antiquewhite;
+    width: 12rem;
+}

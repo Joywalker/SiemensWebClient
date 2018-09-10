@@ -3,6 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from '../app/app.routing';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { SidebarModule } from 'ng-sidebar';
+import { AuthService } from './Services/auth-service';
 
 import { MapValuesPipe } from './Services/get-values-pipe';
 
@@ -18,6 +23,7 @@ import { RecipeManagementService } from './Services/recipe-management-service';
 import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
+import { AuthGuardService } from './Services/auth-guard-service';
 
 
 
@@ -33,16 +39,23 @@ import { RestorePasswordComponent } from './components/user/restore-password/res
     RecipeAddComponent,
     RecipeViewComponent,
     RestorePasswordComponent
-    
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    routes
+    routes,
+    MatSidenavModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    SidebarModule.forRoot(),
+
+
   ],
-  providers: [UserManagementService, StorageManagementService, RecipeManagementService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService, AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

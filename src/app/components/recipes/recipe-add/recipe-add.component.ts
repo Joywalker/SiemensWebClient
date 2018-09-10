@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./recipe-add.component.css']
 })
 export class RecipeAddComponent implements OnInit {
-  @Input() recipeName: String;
+  @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
@@ -142,12 +142,7 @@ export class RecipeAddComponent implements OnInit {
 
   deleteRecipe(recipeName) {
     this._recipeManagementService.deleteRecipeByID(this.recipeName).subscribe(response => {
-      if (response) {
-        this._router.navigateByUrl("/recipe/get");
-      } else {
-        alert("ERROR");
-        console.log(response);
-      }
+      this._router.navigateByUrl("/recipe/get")
     })
   }
 }
