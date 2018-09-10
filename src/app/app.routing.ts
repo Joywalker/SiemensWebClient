@@ -13,7 +13,6 @@ import { AuthGuardService } from './Services/auth-guard-service';
 
 
 export const router: Routes = [
-
     { path: 'welcome', component: LandingPageComponent, canActivate: [AuthGuardService]},
     { path: 'user/login', component: LoginComponent },
     { path: 'user/forgotPassword', component: ForgotPasswordComponent },

@@ -22,12 +22,8 @@ import { StorageManagementService } from './Services/storage.management.service'
 import { RecipeManagementService } from './Services/recipe-management-service';
 import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
-<<<<<<< HEAD
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
-=======
-import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
->>>>>>> feature/Client-002.RecipesManagement
 
 
 
@@ -42,13 +38,8 @@ import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edi
     MapValuesPipe,
     RecipeAddComponent,
     RecipeViewComponent,
-<<<<<<< HEAD
     RestorePasswordComponent
 
-=======
-    RecipeEditComponent
-    
->>>>>>> feature/Client-002.RecipesManagement
   ],
   imports: [
     BrowserModule,

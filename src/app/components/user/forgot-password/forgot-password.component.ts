@@ -16,7 +16,6 @@ export class ForgotPasswordComponent implements OnInit {
               private _userManagementService: UserManagementService,
               private router: Router) { }
 
-<<<<<<< HEAD
   ngOnInit() {
     this.forgotPasswordForm = this._fb.group({
       CNP: ['', [Validators.required, Validators.pattern('[0-9]{13}')]],
@@ -35,14 +34,4 @@ export class ForgotPasswordComponent implements OnInit {
       }
     })
   }
-=======
-              ngOnInit() {
-                this.forgotPasswordForm = this._fb.group({
-                    CNP: ['', [Validators.required, Validators.pattern('[0-9]')]],
-                    ID: ['', [Validators.required]],
-                    FirstName: ['', [Validators.required]],
-                    LastName: ['', [Validators.required]],
-                })
-            }
->>>>>>> feature/Client-002.RecipesManagement
 }
