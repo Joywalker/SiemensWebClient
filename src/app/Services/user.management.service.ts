@@ -11,17 +11,13 @@ import { Observable } from 'rxjs/internal/Observable';
 
 
 @Injectable()
-export class UserManagementService implements OnDestroy {
+export class UserManagementService {
     private permissions: {[key: string]: PermissionsEnum[]}
     private userType : UserTypes;
     private sessionState: boolean;
 
     constructor(private _http: HttpClient) { }
 
-    getAllUsers()
-    {
-        return this._http.get(URLMapper.API_URL+ URLMapper.API_GET_ALL_USERS);
-    }
     loginUser(user: UserViewModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this._http.post(URLMapper.API_URL + URLMapper.API_LOGIN_USER_URL_PATH, user, { headers: headers })
@@ -49,16 +45,8 @@ export class UserManagementService implements OnDestroy {
             this.sessionState = true;
         }
     }
-    getRightsForUserRole(userRole: string)
-    {
-        return this._http.put(URLMapper.API_URL + URLMapper.API_GET_USER_RIGHTS, userRole);
-    }
     errorHandler(error: Response) {
         console.log(error);
         return Observable.throw(error);
-    }
-
-    ngOnDestroy() {
-
     }
 }
