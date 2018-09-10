@@ -6,8 +6,8 @@ declare var jquery: any;
 declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserManagementService } from 'src/app/Services/user.management.service';
-import { PermissionsEnum, UserTypes } from '../../../Models/user-rights-enums';
 import { AuthService } from '../../../Services/auth-service';
+import { PermissionsEnum } from '../../../Models/user-rights-enums';
 
 // export for others scripts to use
 
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
     userLoginForm: FormGroup;
     errorMessage: any;
+    invalidCredentialMsg: string;
 
     constructor(private _fb: FormBuilder,
         private _userManagementService: UserManagementService,
@@ -44,14 +45,18 @@ export class LoginComponent implements OnInit {
         })
     }
     onSubmit() {
-        if (this.userLoginForm.valid) {
-            this._userManagementService.loginUser(this.userLoginForm.value)
-                .subscribe((data) => {
-                    this._auth.sendToken(this.userLoginForm.value.Password)
-                    this._userManagementService.setUserTypeAndPermissions(data);
-                    this.router.navigateByUrl('welcome');
-                },
-                    error => this.errorMessage = error)
-        }
+        let uname = this.userLoginForm.get('Username').value;
+        let pwd = this.userLoginForm.get('Password').value;
+        this._auth.isUserAuthenticated(uname, pwd).subscribe(
+            authenticated => {
+                console.log(authenticated);
+                if (authenticated) {
+                    let url = this._auth.getRedirectUrl();
+                    console.log('Redirect url ' + url);
+                    this.router.navigate([url]);
+                } else {
+                    this.invalidCredentialMsg = 'Invalid Credentials.';
+                }
+            })
     }
 }

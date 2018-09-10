@@ -1,13 +1,13 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
 import { Response, Http, } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { UserModel } from 'src/app/Models/user-model';
 import { UserViewModel } from '../Models/user-view-model';
 import { URLMapper } from '../app.urlmapping';
 import { UserRestorePasswordViewModel } from '../Models/user-password-restore-view-model';
-import { PermissionsEnum, UserTypes } from '../Models/user-rights-enums';
+import { PermissionsEnum, UserTypes, User } from '../Models/user-rights-enums';
+import { Observable } from 'rxjs/internal/Observable';
 
 
 @Injectable()
@@ -18,6 +18,10 @@ export class UserManagementService implements OnDestroy {
 
     constructor(private _http: HttpClient) { }
 
+    getAllUsers()
+    {
+        return this._http.get(URLMapper.API_URL+ URLMapper.API_GET_ALL_USERS);
+    }
     loginUser(user: UserViewModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this._http.post(URLMapper.API_URL + URLMapper.API_LOGIN_USER_URL_PATH, user, { headers: headers })
@@ -45,9 +49,9 @@ export class UserManagementService implements OnDestroy {
             this.sessionState = true;
         }
     }
-    getSessionState()
+    getRightsForUserRole(userRole: string)
     {
-        return this.sessionState;
+        return this._http.put(URLMapper.API_URL + URLMapper.API_GET_USER_RIGHTS, userRole);
     }
     errorHandler(error: Response) {
         console.log(error);

@@ -9,4 +9,6 @@ export class URLMapper {
     public static get API_CHECK_IF_USER_EXISTS(): string { return "api/user/recover"; }
     public static get API_UPDATE_USER_PASSWORD(): string { return "api/user/updatePassword"; }
     public static get API_REGISTER_NEW_USER(): string { return "api/user/register"; }
+    public static get API_GET_ALL_USERS(): string { return "api/user/all"; }
+    public static get API_GET_USER_RIGHTS(): string { return "api/user/getPermissions"; }
 }

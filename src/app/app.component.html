@@ -1,13 +1,75 @@
-<nav class="navbar navbar-dark bg-dark navbar-static-top">
-    <div class="navbar-expand ml-auto navbar-nav">
-        <div class="navbar navbar-brand pull-left">
-            <a class="nav-item">Automation Line</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="panel">
+        <div class="panel-body">
+            <a class="navbar-brand" href="#">Chips Factory</a>
         </div>
-        <div class="navbar-nav">
-            <a href class="nav-item nav-link" *ngIf="!auth.isLoggednIn()" [routerLink]="['user/login']"><i class="fa fa-user">
-                    Login</i></a>
-            <a href class="nav-item nav-link" *ngIf="auth.isLoggednIn()" (click)="auth.logout()"><i class="fa fa-user"> Logout</i></a>
+        <div class="panel-footer">
+            <span class="text-center" *ngIf="auth.isUserLoggedIn()">Logged in as {{auth.getLoggedInUser().Username}}</span>
         </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" *ngIf="auth.isUserLoggedIn()">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['welcome']"> Welcome <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" *ngIf="!auth.isUserAdmin()" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Storage
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">View Feedstock</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">Storage View</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">Storage Edit</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recipe
+                </a>
+                <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['recipe/get']">View
+                        Recipes</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" [routerLink]="['recipe/add']">Add New Recipe</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Orders
+                </a>
+                <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">View Orders</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">Place Order</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Stock
+                </a>
+                <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" href="#">View Stock Graph</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator() " href="#">View Stock</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="auth.isUserAdmin()">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Users
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" [routerLink]="['register']" href="#">Add new User</a>
+                    </div>
+                </li>
+        </ul>
+    </div>
+    <div class="navbar nav-item pull-right">
+        <a href class="nav-item nav-link pull-right" *ngIf="!auth.isUserLoggedIn()" [routerLink]="['user/login']"><i class="fa fa-user">
+                Login</i> </a>
+        <a href class="nav-item nav-link pull-right" *ngIf="auth.isUserLoggedIn()" (click)="auth.logoutUser()"><i class="fa fa-user">
+                Logout</i>
+        </a>
     </div>
 </nav>
 <div class="container">

@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./recipe-add.component.css']
 })
 export class RecipeAddComponent implements OnInit {
-  @Input() recipeName: String;
+  @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
