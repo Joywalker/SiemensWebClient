@@ -27,6 +27,9 @@ import { RestorePasswordComponent } from './components/user/restore-password/res
 import { AuthGuardService } from './Services/auth-guard-service';
 import { ViewStockComponent } from './components/view-stock/view-stock.component';
 import { ViewStockManagementService } from './Services/view-stock.management.service';
+import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
+import { OrdersManagementService } from './Services/orders.management.service';
+import { OrdersComponent } from './components/orders/orders-view/orders.component';
 
 
 
@@ -42,7 +45,9 @@ import { ViewStockManagementService } from './Services/view-stock.management.ser
     RecipeAddComponent,
     RecipeViewComponent,
     RestorePasswordComponent,
-    ViewStockComponent
+    ViewStockComponent,
+    OrdersComponent,
+    OrdersAddComponent
 
   ],
   imports: [
@@ -59,7 +64,7 @@ import { ViewStockManagementService } from './Services/view-stock.management.ser
     SidebarModule.forRoot()
 
   ],
-  providers: [UserManagementService, StorageManagementService, RecipeManagementService,ViewStockManagementService, AuthService,AuthGuardService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService,ViewStockManagementService,OrdersManagementService, AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

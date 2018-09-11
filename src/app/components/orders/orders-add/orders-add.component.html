@@ -1,0 +1,27 @@
+<div class="row" *ngIf="isLoaded">
+  <div class="div-center">
+    <div class="card user-card">
+      <div class="card card-header">
+        <h6 class="text-center"> Place new order </h6>
+      </div>
+      <div class="card-body">
+        <form class="form-group" [formGroup]="orderFormGroup" (ngSubmit)="onSubmit()">
+          <label for="RecipeNameID">Recipe</label>
+          <select id="RecipeNameID" class="form-control" formControlName="Recipe" aria-placeholder="Select Recipe">
+            <option *ngFor="let recipeName of recipeNames" [ngValue]="recipeName" selected>{{recipeName}}</option>
+          </select>
+          <br>
+          <div class="row">
+            <div class="col-md-8 text-center">
+              <label for="amountID"># of bags</label>
+              <input class="form-control" id="amountID" type="number" min="0" formControlName="Amount">
+            </div>
+          </div>
+          <br>
+          <hr>
+          <button class="form-control btn-success" type="submit">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

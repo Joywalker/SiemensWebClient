@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row" *ngFor="let field of ordersArray">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{field.ID_order}}</td>
+            <td>{{field.Recipe}}</td>
+            <td>{{field.Amount}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row" *ngIf="">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+         <div class="card user-card">
+           <form [formGroup]="orderFormGroup">
+            <input class="form-control" formControlName="Recipe">
+            <input class="form-control" formControlName="Amount">
+           </form>
+         </div>
+        </div>
+  </div>
+</div>

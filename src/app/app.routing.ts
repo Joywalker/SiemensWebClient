@@ -10,6 +10,8 @@ import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-vie
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
 import { ViewStockComponent } from './components/view-stock/view-stock.component';
+import { OrdersComponent } from './components/orders/orders-view/orders.component';
+import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 
 
 
@@ -23,7 +25,10 @@ export const router: Routes = [
     { path: 'recipe/add', component: RecipeAddComponent, canActivate: [AuthGuardService]},
     { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuardService] },
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},
-    { path: 'stock/view', component: ViewStockComponent, canActivate: [AuthGuardService]}
+    { path: 'stock/view', component: ViewStockComponent, canActivate: [AuthGuardService]},
+    { path: 'orders/view', component: OrdersComponent, canActivate: [AuthGuardService]},
+    { path: 'orders/add', component: OrdersAddComponent, canActivate: [AuthGuardService]}
+
     ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

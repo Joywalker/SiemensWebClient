@@ -6,6 +6,8 @@ export class URLMapper {
     public static get API_GET_STORAGE_STATUS_URL_PATH(): string { return "api/Storage"; }
     public static get API_GET_STOCK_DATA(): string { return "api/stock/viewAll"; }
     public static get API_GET_STOCK_GRAPH_DATA(): string { return "api/stock/lastMonthEv"; }
+    public static get API_GET_ORDERS(): string { return "api/orders/get"; }
+    public static get API_PLACE_ORDER(): string { return "api/orders/add"; }
     public static get API_DELETE_RECIPE_BY_ID(): string  { return "api/recipe/delete"; }
     public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/editStorage"; }
     public static get API_LOGIN_USER_URL_PATH(): string { return "api/user/login"; }
