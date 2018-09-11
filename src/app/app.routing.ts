@@ -9,6 +9,7 @@ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.c
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
+import { ViewStockComponent } from './components/view-stock/view-stock.component';
 
 
 
@@ -22,7 +23,7 @@ export const router: Routes = [
     { path: 'recipe/add', component: RecipeAddComponent, canActivate: [AuthGuardService]},
     { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuardService] },
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},
-    { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]}
+    { path: 'stock/view', component: ViewStockComponent, canActivate: [AuthGuardService]}
     ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

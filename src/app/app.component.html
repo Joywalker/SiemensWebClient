@@ -21,7 +21,6 @@
                     Storage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Feedstock</a>
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a>
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Storage Edit</a>
                 </div>
@@ -50,8 +49,7 @@
                     Stock
                 </a>
                 <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" >View Stock Graph</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Stock</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['stock/view']">View Stock</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="auth.isUserAdmin()">
