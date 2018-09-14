@@ -1,0 +1,9 @@
+.div-center{
+    width: 40%;
+    margin: 0 auto;
+}
+.center{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}

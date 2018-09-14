@@ -27,6 +27,7 @@ import { RestorePasswordComponent } from './components/user/restore-password/res
 import { AuthGuardService } from './Services/auth-guard-service';
 import { ViewStockComponent } from './components/view-stock/view-stock.component';
 import { ViewStockManagementService } from './Services/view-stock.management.service';
+import { StorageEditComponent } from './components/storage-management/storage-edit/storage-edit.component';
 
 
 
@@ -42,7 +43,8 @@ import { ViewStockManagementService } from './Services/view-stock.management.ser
     RecipeAddComponent,
     RecipeViewComponent,
     RestorePasswordComponent,
-    ViewStockComponent
+    ViewStockComponent,
+    StorageEditComponent
 
   ],
   imports: [

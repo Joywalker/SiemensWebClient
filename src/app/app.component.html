@@ -22,7 +22,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Storage Edit</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" [routerLink]="['storage/edit']">Storage Edit</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">

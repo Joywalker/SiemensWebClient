@@ -1,0 +1,59 @@
+<div class="div-center">
+  <div class="card">
+    <div class="card card-header">
+      <h5 class="text-center header">Edit Storage</h5>
+    </div>
+    <div class="card-body">
+      <form class="form-horizontal" [formGroup]="storageEditFormGroup" (ngSubmit)="onSubmit()">
+        <div class="panel shadow-lg p-1 mb-2 bg-white rounded">
+          <label class="label-default">Compartment</label>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="control-label"><span>
+                    <i class="fa fa-bitbucket-square"></i>
+                  </span> Source</label>
+                <div class="col-sm-10">
+                  <select class="form-control" formControlName="ID_SC">
+                    <option *ngFor="let compartment of compartmentsArray" [ngValue]="compartment" selected>{{compartment}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="control-label">
+                  <span>
+                    <i class="fa fa-bitbucket-square"></i>
+                  </span> Destination</label>
+                <div class="col-sm-10">
+                  <select class="form-control" formControlName="ID_DC">
+                    <option *ngFor="let compartment of compartmentsArray" [ngValue]="compartment" selected>{{compartment}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel shadow-lg p-1 mb-1 bg-white rounded center">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <label class="control-label"><span>
+                  </span>Feedstock</label>
+                <select class="form-control" formControlName="MaterialName">
+                  <option *ngFor="let feedstock of feedstockArray" [ngValue]="feedstock" selected>{{feedstock}}</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label class="control-label">Quantity <code>KG</code></label>
+                <div class="col-sm-10">
+                  <input id="qttID" class="form-control" formControlName="Quantity">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success text-center">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
