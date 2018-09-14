@@ -20,31 +20,22 @@ export class RegisterComponent implements OnInit {
   constructor(private _fb: FormBuilder,
     private _userManagementService: UserManagementService) { }
 
-  togglePassword() {
-    $(".toggle-password").click(function () {
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var input = $($(this).attr("toggle"));
-      if (input.attr("type") == "password") {
-        input.attr("type", "text");
-      } else {
-        input.attr("type", "password");
-      }
-    });
-  }
   ngOnInit() {
     this.userRegistrationForm = this._fb.group({
-      ID: ['', [Validators.required]],
-      Type: ['', [Validators.required]],
-      FirstName: ['', [Validators.required]],
-      LastName: ['', [Validators.required]],
-      CNP: ['', [Validators.required]],
+      Username: ['', [Validators.required]],
       Password: ['', [Validators.required]],
+      CNP: ['', [Validators.required, Validators.pattern('[0-9]{13}')]],
+      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
+      LastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
+      Employee_ID: ['', [Validators.required, Validators.pattern('[0-9a-zA-z]{8}')]],
+      UserRole: ['', [Validators.required]],
     })
   }
 
   onSubmit() {
 
     this.userModel = <UserModel>this.userRegistrationForm.value;
+    console.log(this.userModel);
     this._userManagementService.saveUser(this.userModel)
       .subscribe(result => {
         console.log(result);

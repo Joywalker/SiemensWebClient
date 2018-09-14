@@ -1,4 +1,29 @@
 .center {
-    margin: auto;
+    width: 50%;
+    margin: 0 auto;
     text-align: center;
+}
+.center  {
+    text-align: center;
+  }
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+  transition : border 1.5s;
+}
+
+input.ng-valid {
+  border: 1.5px solid forestgreen;
+  transition : border 1s;
+}
+
+#f:valid
+{
+  background-color: greenyellow;
+}
+
+.div-center
+{
+  margin: 0px auto;
+  width: 20%;
 }
