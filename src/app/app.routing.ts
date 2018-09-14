@@ -9,6 +9,7 @@ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.c
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
+import { StorageEditComponent } from './components/storage-management/storage-edit/storage-edit.component';
 
 
 
@@ -18,7 +19,8 @@ export const router: Routes = [
     { path: 'user/forgotPassword', component: ForgotPasswordComponent },
     { path: 'user/forgotPassword/restore', component: RestorePasswordComponent },
     { path: 'register', component: RegisterComponent,canActivate: [AuthGuardService] },
-    { path: 'storage', component: StorageManagementComponent,canActivate: [AuthGuardService] },
+    { path: 'storage', component: StorageManagementComponent, canActivate: [AuthGuardService] }, //d
+    { path: 'storage/edit', component: StorageEditComponent, canActivate: [AuthGuardService] }, // d
     { path: 'recipe/add', component: RecipeAddComponent, canActivate: [AuthGuardService]},
     { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuardService] },
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},

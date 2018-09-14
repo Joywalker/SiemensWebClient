@@ -24,6 +24,7 @@ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.c
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
+import { StorageEditComponent } from './components/storage-management/storage-edit/storage-edit.component';
 
 
 
@@ -38,7 +39,8 @@ import { AuthGuardService } from './Services/auth-guard-service';
     MapValuesPipe,
     RecipeAddComponent,
     RecipeViewComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    StorageEditComponent
 
   ],
   imports: [

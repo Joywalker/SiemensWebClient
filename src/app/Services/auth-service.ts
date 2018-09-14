@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { map } from "rxjs/operators";
 import { Router } from '@angular/router';
+import { map } from "rxjs/operators";
+import { Observable } from 'rxjs/internal/Observable';
 
 
 
 import { User, PermissionsEnum } from '../Models/user-rights-enums'
 import { UserManagementService } from './user.management.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { UserViewModel } from '../Models/user-view-model';
 
 
