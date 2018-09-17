@@ -21,8 +21,6 @@ export class ViewStockComponent implements OnInit, AfterContentInit {
     responsive: true
   };
   public barChartType:string = 'bar';
-
- 
   public barChartData:any[] = [
   ];
   isOk = false;
@@ -40,11 +38,10 @@ export class ViewStockComponent implements OnInit, AfterContentInit {
         ((collection: StockGraphDataModel[])  => {
           console.log(collection);
           collection.forEach(value => {
-            const label = new Date(value.Key).toDateString();
-            const data = {data: [value.Value], label: label};
+            const label = new Date(value.date).toLocaleDateString();
+            const data = {data: [value.number], label: label};
             this.barChartData.push(data);
           });
-          console.log(this.barChartData);
           this.isOk = true;
         }))
      })
@@ -56,6 +53,6 @@ export class ViewStockComponent implements OnInit, AfterContentInit {
 }
 
 interface StockGraphDataModel {
-  Key: Date;
-  Value: number;
+  date: Date;
+  number: number;
 }

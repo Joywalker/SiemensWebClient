@@ -27,8 +27,8 @@
             <td>{{line.ID_compartment}}</td>
             <td>{{line.FeedstockName}}</td>
             <td>{{line.QuantityStored}}</td>
-            <td>{{line.NewestDateOfSupply}}</td>
-            <td>{{line.OldestDateOfSupply}}</td>
+            <td>{{line.NewestDateOfSupply |date}}</td>
+            <td>{{line.OldestDateOfSupply |date}}</td>
             <td>{{line.QuantityFromTheOldestDate}}</td>
           </tr>
         </tbody>
