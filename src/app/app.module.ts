@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { SidebarModule } from 'ng-sidebar';
 import { AuthService } from './Services/auth-service';
+import { ChartsModule } from 'ng2-charts'
 
 import { MapValuesPipe } from './Services/get-values-pipe';
 
@@ -24,6 +25,12 @@ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.c
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
+import { ViewStockComponent } from './components/view-stock/view-stock.component';
+import { ViewStockManagementService } from './Services/view-stock.management.service';
+import { StorageEditComponent } from './components/storage-management/storage-edit/storage-edit.component';
+import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
+import { OrdersManagementService } from './Services/orders.management.service';
+import { OrdersComponent } from './components/orders/orders-view/orders.component';
 
 
 
@@ -38,7 +45,11 @@ import { AuthGuardService } from './Services/auth-guard-service';
     MapValuesPipe,
     RecipeAddComponent,
     RecipeViewComponent,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    ViewStockComponent,
+    StorageEditComponent,
+    OrdersComponent,
+    OrdersAddComponent
 
   ],
   imports: [
@@ -51,11 +62,11 @@ import { AuthGuardService } from './Services/auth-guard-service';
     MatButtonModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    SidebarModule.forRoot(),
-
+    ChartsModule,
+    SidebarModule.forRoot()
 
   ],
-  providers: [UserManagementService, StorageManagementService, RecipeManagementService, AuthService,AuthGuardService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService,ViewStockManagementService,OrdersManagementService, AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

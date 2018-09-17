@@ -5,3 +5,6 @@ th {
 .col {
     background-color: cadetblue;
 }
+.container {
+    margin: 0 auto;
+}

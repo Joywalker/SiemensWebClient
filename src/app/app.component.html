@@ -17,22 +17,23 @@
                 <a class="nav-link" [routerLink]="['welcome']"> Welcome <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" *ngIf="!auth.isUserAdmin()" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" *ngIf="!auth.isUserAdmin()" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Storage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Feedstock</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Storage Edit</a>
-                </div>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage
+                        View</a></div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Recipe
                 </a>
-                <div class="dropdown-menu"  aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['recipe/get']">View
-                        Recipes</a>
+                        Recipes
+                    </a>
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer()" [routerLink]="['recipe/add']">Add New Recipe</a>
                 </div>
             </li>
@@ -41,8 +42,9 @@
                     Orders
                 </a>
                 <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" href="#">View Orders</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Place Order</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['orders/view']">View
+                        Orders</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" [routerLink]="['orders/add']">Place Order</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
@@ -50,18 +52,18 @@
                     Stock
                 </a>
                 <div class="dropdown-menu" *ngIf="!auth.isUserAdmin()" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()" >View Stock Graph</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Stock</a>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['stock/view']">View
+                        Stock</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="auth.isUserAdmin()">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Users
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" [routerLink]="['register']">Add new User</a>
-                    </div>
-                </li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Users
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" [routerLink]="['user/register']">Add new User</a>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="navbar nav-item pull-right">
