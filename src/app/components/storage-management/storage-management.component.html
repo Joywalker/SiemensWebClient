@@ -3,6 +3,9 @@
     <div class=" col-lg-2 col-md-2 col-sm-3 col-xs-2" *ngFor="let entry of storageMap | mapValues">
       <span><button class="btn btn-dark" id="{{entry[0]}}" (click)="toggleDepositViewWith($event)">Deposit {{entry[0]}}</button></span>
     </div>
+    <div class="panel" *ngIf="auth.isUserEngineer()">
+        <button class="btn btn-warning" [routerLink]="['./edit']" value="Edit">Edit</button>
+      </div>
   </div>
   <div class="row">
     <div class="col-lg-12 col-md-8 col-sm-6">
@@ -31,4 +34,5 @@
         </tbody>
       </table>
     </div>
+    
   </div>
