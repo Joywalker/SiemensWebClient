@@ -9,10 +9,10 @@ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.c
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
 import { AuthGuardService } from './Services/auth-guard-service';
-import { ViewStockComponent } from './components/view-stock/view-stock.component';
 import { StorageEditComponent } from './components/storage-management/storage-edit/storage-edit.component';
 import { OrdersComponent } from './components/orders/orders-view/orders.component';
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
+import { ViewStockComponent } from './components/view-stock/view-stock.component';
 
 
 
