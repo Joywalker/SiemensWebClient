@@ -24,6 +24,8 @@ export const router: Routes = [
     { path: 'register', component: RegisterComponent,canActivate: [AuthGuardService] },
     { path: 'storage', component: StorageManagementComponent, canActivate: [AuthGuardService] }, //d
     { path: 'storage/edit', component: StorageEditComponent, canActivate: [AuthGuardService] }, // d
+    { path: 'user/register', component: RegisterComponent},
+    { path: 'storage', component: StorageManagementComponent,canActivate: [AuthGuardService] },
     { path: 'recipe/add', component: RecipeAddComponent, canActivate: [AuthGuardService]},
     { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuardService] },
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},
@@ -32,5 +34,4 @@ export const router: Routes = [
     { path: 'orders/add', component: OrdersAddComponent, canActivate: [AuthGuardService]}
 
     ];
-
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

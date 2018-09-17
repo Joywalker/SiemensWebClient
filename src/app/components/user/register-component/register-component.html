@@ -1,42 +1,61 @@
-<div class="container">
-        <div class="row">
-            <div class='col-sm-12'>
-                <form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()">
-                    <p class="h5 text-center mb-4">User Management</p>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                        <label for="angajat-id">Employee ID</label>
-                        <input type="text" formControlName="ID" id="angajat-id" class="form-control">
+<div class="container center">
+    <div class="row">
+        <div class='col-sm-12'>
+            <form [formGroup]="userRegistrationForm"  #f="ngForm" (ngSubmit)="onSubmit()">
+                <p class="h5 text-center mb-4">User Management</p>
+                <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="usernameID">Username</label>
+                                <input type="text" formControlName="Username" id="usernameID" class="form-control">
+                            </div>
+                            <div class="col-sm-4">
+                                    <label for="password-id">Password</label>
+                                    <input type="password" formControlName="Password" id="password-id" class="form-control">
+                                </div>
+                        </div>
                     </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="angajat-id">Employee ID</label>
+                            <input type="text" formControlName="Employee_ID" id="angajat-id" class="form-control">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="type-id">User Type</label>
+                            <select formControlName="UserRole" id="type-id" class="form-control">
+                                <option>ADMIN</option>
+                                <option>OPERATOR</option>
+                                <option>ENGINEER</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <label for="type-id">User Type</label>
-                        <input type="number" formControlName="Type" id="typo-id" class="form-control"  />
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="firstname-id">First Name</label>
+                            <input type="text" formControlName="FirstName" id="firstname-id" class="form-control" />
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="lastname-id">Last Name</label>
+                            <input type="text" formControlName="LastName" id="lastname-id" class="form-control" />
+                        </div>
                     </div>
-                    <div class="form-row">
-                        <label for="firstname-id">First Name</label>
-                        <input type="text" formControlName="FirstName" id="firstname-id" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="cnp-id">PID</label>
+                            <input type="text" formControlName="CNP" id="cnp-id" class="form-control">
+                        </div>
                     </div>
-
-                    <div class="form-row">
-                        <label for="lastname-id">Last Name</label>
-                        <input type="text" formControlName="LastName" id="lastname-id" class="form-control"  />
-                    </div>
-
-                    <div class="form-row">
-                        <label for="cnp-id">PID</label>
-                        <input type="text" formControlName="CNP" id="cnp-id" class="form-control">
-                    </div>
-
-                    <div class="form-row">
-                        <label for="password-id">Password</label>
-                        <input type="password" formControlName="Password" id="password-id" class="form-control">
-                    </div>
-                    <br>
-                    <div class="text-center">
-                        <input type="submit" value="Register" class="btn btn-success"/>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <br>
+                <div class="text-center">
+                    <input type="submit" [disabled]="!f.valid" value="Register" class="btn btn-success" />
+                </div>
+            </form>
         </div>
+    </div>
 </div>

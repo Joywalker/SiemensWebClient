@@ -1,0 +1,584 @@
+From a56c50629850f7937c1239546bba9369b3f9a36a Mon Sep 17 00:00:00 2001
+From: "CTBAV\\alexandru.razvant" <alexandru.razvant@ctbav.ro>
+Date: Tue, 4 Sep 2018 15:06:37 +0300
+Subject: [PATCH] Added ForgotPassword and RecoverPassword functionality.
+
+---
+ src/app/Models/password-validator.ts               | 14 ++++++++
+ src/app/Models/user-password-restore-view-model.ts |  6 ++++
+ src/app/Models/user-rights-enums.ts                | 23 +++++++++++++
+ src/app/Services/user.management.service.ts        | 29 +++++++++--------
+ src/app/app.module.ts                              |  4 +--
+ src/app/app.routing.ts                             |  8 +++--
+ src/app/app.urlmapping.ts                          |  9 +++--
+ .../recipes/recipe-add/recipe-add.component.ts     |  7 +++-
+ .../forgot-password/forgot-password.component.css  | 17 ++++++++--
+ .../forgot-password/forgot-password.component.html | 36 ++++++++++++++------
+ .../forgot-password/forgot-password.component.ts   | 37 ++++++++++++++-------
+ .../user/login-component/login-component.ts        | 30 ++++++++---------
+ .../restore-password.component.css                 |  4 +++
+ .../restore-password.component.html                | 38 ++++++++++++++++++++++
+ .../restore-password.component.spec.ts             | 25 ++++++++++++++
+ .../restore-password/restore-password.component.ts | 37 +++++++++++++++++++++
+ 16 files changed, 261 insertions(+), 63 deletions(-)
+ create mode 100644 src/app/Models/password-validator.ts
+ create mode 100644 src/app/Models/user-password-restore-view-model.ts
+ create mode 100644 src/app/Models/user-rights-enums.ts
+ create mode 100644 src/app/components/user/restore-password/restore-password.component.css
+ create mode 100644 src/app/components/user/restore-password/restore-password.component.html
+ create mode 100644 src/app/components/user/restore-password/restore-password.component.spec.ts
+ create mode 100644 src/app/components/user/restore-password/restore-password.component.ts
+
+diff --git a/src/app/Models/password-validator.ts b/src/app/Models/password-validator.ts
+new file mode 100644
+index 0000000..78f4855
+--- /dev/null
++++ b/src/app/Models/password-validator.ts
+@@ -0,0 +1,14 @@
++import {AbstractControl} from '@angular/forms';
++export class PasswordValidator {
++    static MatchPassword(AC: AbstractControl)
++    {
++        const password = AC.get('password').value;
++        const confirmPassword = AC.get('confirmPassword').value;
++        if(password != confirmPassword)
++        {
++            AC.get('confirmPassword').setErrors({MatchPassword: true})
++        } else {
++            return null;
++        }
++    }
++}
+\ No newline at end of file
+diff --git a/src/app/Models/user-password-restore-view-model.ts b/src/app/Models/user-password-restore-view-model.ts
+new file mode 100644
+index 0000000..175e3da
+--- /dev/null
++++ b/src/app/Models/user-password-restore-view-model.ts
+@@ -0,0 +1,6 @@
++export class UserRestorePasswordViewModel{
++    CNP?: string
++    EmployeeID?: string
++    FirstName?: string
++    LastName?: string
++}
+\ No newline at end of file
+diff --git a/src/app/Models/user-rights-enums.ts b/src/app/Models/user-rights-enums.ts
+new file mode 100644
+index 0000000..e1f837f
+--- /dev/null
++++ b/src/app/Models/user-rights-enums.ts
+@@ -0,0 +1,23 @@
++export enum UserTypes
++{
++    ADMIN,
++    OPERATOR,
++    ENGINEER
++}
++
++export enum PermissionsEnum
++{
++    "CAN_VIEW_PRODUCT_STOCK",
++    "CAN_VIEW_STORAGE",
++    "CAN_VIEW_FEEDSTOCK",
++    "CAN_DO_ORDERS",
++    "CAN_RESSUPLY",
++    "CAN_EDIT_FEEDSTOCK",
++    "CAN_EDIT_STORAGE",
++    "CAN_EDIT_PRODUCT_STOCK",
++    "CAN_EDIT_ORDERS",
++    "CAN_VIEW_STOCK_GRAPH",
++    "CAN_VIEW_SOLD_PRODUCTS_GRAPH",
++    "CAN_CREATE_USERS",
++    "CAN_EDIT_USER_RIGHTS"
++}
+\ No newline at end of file
+diff --git a/src/app/Services/user.management.service.ts b/src/app/Services/user.management.service.ts
+index 0e1eb4a..7453b68 100644
+--- a/src/app/Services/user.management.service.ts
++++ b/src/app/Services/user.management.service.ts
+@@ -5,32 +5,33 @@ import { HttpClient } from '@angular/common/http';
+ import { HttpHeaders } from '@angular/common/http';
+ import { UserModel } from 'src/app/Models/user-model';
+ import { UserViewModel } from '../Models/user-view-model';
+-
+-
++import { UserRestorePasswordViewModel } from '../Models/user-password-restore-view-model';
++import { URLMapper } from '../app.urlmapping';
+ 
+ @Injectable()
+ export class UserManagementService {
+-
+-    myAppUrl: string = "http://localhost:50161/";
+-    constructor(private _http: HttpClient) {
+-        
+-    }
++    constructor(private _http: HttpClient) {}
+ 
+     loginUser(user: UserViewModel) {
+         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+-        return this._http.post(this.myAppUrl + "api/User/Login", user, { headers: headers })
+-    }
+-    getAllUsers() {
+-            return this._http.get(this.myAppUrl + 'api/UserManagement/GetAll');
++        return this._http.post(URLMapper.API_URL + URLMapper.API_LOGIN_USER_URL_PATH, user, { headers: headers })
+     }
+ 
+-
+     saveUser(user: UserModel) {
+         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+         let body = user.Username+ ":" +user.Password;
+-        return this._http.post(this.myAppUrl + "api/User/Login", body, { headers: headers })
++        return this._http.post(URLMapper.API_URL + URLMapper.API_REGISTER_NEW_USER, body, { headers: headers })
++    }
++    updatePasswordForUserWith(cnp: string, newPassword: string)
++    {
++        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
++        const body = cnp + "|" + newPassword;
++        return this._http.post(URLMapper.API_URL + URLMapper.API_UPDATE_USER_PASSWORD, body, {headers: headers})
++    }
++    checkIfUserExists(confirmationForm: UserRestorePasswordViewModel) {
++        let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
++        return this._http.put(URLMapper.API_URL + URLMapper.API_CHECK_IF_USER_EXISTS, confirmationForm, {headers: headers})
+     }
+-
+     errorHandler(error: Response) {
+         console.log(error);
+         return Observable.throw(error);
+diff --git a/src/app/app.module.ts b/src/app/app.module.ts
+index 70b9eee..78eafaa 100644
+--- a/src/app/app.module.ts
++++ b/src/app/app.module.ts
+@@ -17,7 +17,7 @@ import { StorageManagementService } from './Services/storage.management.service'
+ import { RecipeManagementService } from './Services/recipe-management-service';
+ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
+ import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
+-import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edit.component';
++import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
+ 
+ 
+ 
+@@ -32,7 +32,7 @@ import { RecipeEditComponent } from './components/recipes/recipe-edit/recipe-edi
+     MapValuesPipe,
+     RecipeAddComponent,
+     RecipeViewComponent,
+-    RecipeEditComponent
++    RestorePasswordComponent
+     
+   ],
+   imports: [
+diff --git a/src/app/app.routing.ts b/src/app/app.routing.ts
+index 46cae22..dfd30a9 100644
+--- a/src/app/app.routing.ts
++++ b/src/app/app.routing.ts
+@@ -7,18 +7,20 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
+ import { StorageManagementComponent } from './components/storage-management/storage-management.component';
+ import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
+ import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
++import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
+ 
+ 
+ 
+ export const router: Routes = [
+     { path: 'welcome' , component: LandingPageComponent},
+-    { path: 'login' , component: LoginComponent},
++    { path: 'user/login' , component: LoginComponent},
+     { path: 'register' , component: RegisterComponent},
+-    { path: 'login/forgotPassword' , component: ForgotPasswordComponent},
++    { path: 'user/forgotPassword' , component: ForgotPasswordComponent},
+     { path: 'storage' , component: StorageManagementComponent},
+     { path: 'recipe/add', component: RecipeAddComponent},
+     { path: 'recipe/add/:id', component: RecipeAddComponent},
+-    { path: 'recipe/get', component: RecipeViewComponent}
++    { path: 'recipe/get', component: RecipeViewComponent},
++    { path: 'user/forgotPassword/restore', component: RestorePasswordComponent}
+     
+ ];
+ 
+diff --git a/src/app/app.urlmapping.ts b/src/app/app.urlmapping.ts
+index a6de2b5..68b6f13 100644
+--- a/src/app/app.urlmapping.ts
++++ b/src/app/app.urlmapping.ts
+@@ -3,7 +3,10 @@ export class URLMapper {
+     public static get API_SAVE_RECIPE_URL_PATH(): string { return "api/recipe/add"; }
+     public static get API_GET_RECIPES_URL_PATH(): string { return "api/recipe/get"; }
+     public static get API_DELETE_RECIPE_BY_ID(): string  { return "api/recipe/delete"; }
+-    public static get API_GET_STORAGE_STATUS_URL_PATH(): string { return "api/Storage"; }
+-    public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/EditStorage"; }
+-    public static get API_LOGIN_USER_URL_PATH(): string { return "api/User/Login"; }
++    public static get API_GET_STORAGE_STATUS_URL_PATH(): string { return "api/storage"; }
++    public static get API_EDIT_STORAGE_STATUS_URL_PATH(): string { return "api/editStorage"; }
++    public static get API_LOGIN_USER_URL_PATH(): string { return "api/user/login"; }
++    public static get API_CHECK_IF_USER_EXISTS(): string { return "api/user/recover"; }
++    public static get API_UPDATE_USER_PASSWORD(): string { return "api/user/updatePassword"; }
++    public static get API_REGISTER_NEW_USER(): string { return "api/user/register"; }
+ }
+\ No newline at end of file
+diff --git a/src/app/components/recipes/recipe-add/recipe-add.component.ts b/src/app/components/recipes/recipe-add/recipe-add.component.ts
+index d1fdf4b..f3b52fd 100644
+--- a/src/app/components/recipes/recipe-add/recipe-add.component.ts
++++ b/src/app/components/recipes/recipe-add/recipe-add.component.ts
+@@ -142,7 +142,12 @@ export class RecipeAddComponent implements OnInit {
+ 
+   deleteRecipe(recipeName) {
+     this._recipeManagementService.deleteRecipeByID(this.recipeName).subscribe(response => {
+-      this._router.navigateByUrl("/recipe/get")
++      if (response) {
++        this._router.navigateByUrl("/recipe/get");
++      } else {
++        alert("ERROR");
++        console.log(response);
++      }
+     })
+   }
+ }
+diff --git a/src/app/components/user/forgot-password/forgot-password.component.css b/src/app/components/user/forgot-password/forgot-password.component.css
+index fb7f4ba..a9b6400 100644
+--- a/src/app/components/user/forgot-password/forgot-password.component.css
++++ b/src/app/components/user/forgot-password/forgot-password.component.css
+@@ -2,6 +2,17 @@
+     text-align: center;
+   }
+ 
+-  input:invalid {
+-    background-color: pink;
+-  }
+\ No newline at end of file
++input.ng-invalid.ng-touched {
++  border: 1px solid red;
++  transition : border 1.5s;
++}
++
++input.ng-valid {
++  border: 1.5px solid forestgreen;
++  transition : border 1s;
++}
++
++#f:valid
++{
++  background-color: greenyellow;
++}
+diff --git a/src/app/components/user/forgot-password/forgot-password.component.html b/src/app/components/user/forgot-password/forgot-password.component.html
+index 5690cd5..c083028 100644
+--- a/src/app/components/user/forgot-password/forgot-password.component.html
++++ b/src/app/components/user/forgot-password/forgot-password.component.html
+@@ -3,40 +3,56 @@
+     <div class="col-lg-4"></div>
+     <div class="col-lg-4 col-md-6 col-sm-8">
+       <div class="card">
+-        <br>
+-        <h5 class="title center">Recovery</h5>
+-        <hr>
+-        <form class="form-horizontal" [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()">
++        <div class="card card-header"><h5 class="title center">Recovery</h5></div>
++        <form class="form-horizontal" [formGroup]="forgotPasswordForm" #f="ngForm" (ngSubmit)="onSubmit()">
+           <div class="form-group">
+             <label class="col-md-10 control-label">CNP</label>
+             <div class="col-lg-12">
+-              <input type="text" class="form-control" formControlName="CNP">
+-              <div class="alert alert-danger" *ngIf="CNP.errors.pattern">Only numbers</div>
++              <input type="text" 
++              class="form-control" 
++              formControlName="CNP"
++              data-toggle="tooltip" 
++              data-placement="right" 
++              [title]="cnpHint">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="col-md-10 control-label">ID</label>
+             <div class="col-lg-12">
+-              <input type="text" class="form-control" formControlName="ID">
++              <input type="text" 
++              class="form-control" 
++              formControlName="EmployeeID"
++              data-toggle="tooltip" 
++              data-placement="right" 
++              [title]="employeeIDHint">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="col-md-10 control-label">First Name</label>
+             <div class="col-lg-12">
+-              <input type="text" class="form-control" formControlName="FirstName">
++              <input type="text" 
++              class="form-control" 
++              formControlName="FirstName">
+             </div>
+           </div>
+           <div class="form-group">
+             <label class="col-md-10 control-label">Last Name</label>
+             <div class="col-lg-12">
+-              <input type="text" class="form-control" formControlName="LastName">
++              <input type="text" 
++              class="form-control" 
++              formControlName="LastName">
+             </div>
+           </div>
++          <div class="card card-footer">
+           <div class="form-group center">
+             <div class="col-lg-12">
+-              <input type="submit" class="btn btn-dark center" value="Log in">
++              <input type="submit" 
++              class="btn btn-dark center" 
++              [disabled]="!f.valid" 
++              value="Log in">
+             </div>
+           </div>
++        </div>
+         </form>
+       </div>
+     </div>
+diff --git a/src/app/components/user/forgot-password/forgot-password.component.ts b/src/app/components/user/forgot-password/forgot-password.component.ts
+index 8136a93..690be5b 100644
+--- a/src/app/components/user/forgot-password/forgot-password.component.ts
++++ b/src/app/components/user/forgot-password/forgot-password.component.ts
+@@ -1,6 +1,6 @@
+-import { Component, OnInit } from '@angular/core';
++import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+-import { Router } from '@angular/router';
++import { Router, ActivatedRoute } from '@angular/router';
+ import { UserManagementService } from '../../../Services/user.management.service';
+ 
+ @Component({
+@@ -11,17 +11,30 @@ import { UserManagementService } from '../../../Services/user.management.service
+ export class ForgotPasswordComponent implements OnInit {
+ 
+   forgotPasswordForm: FormGroup;
++  @Input() cnpHint : string = "Insert 13 digits representing your personal identification number."
++  @Input() employeeIDHint: string = "Insert your employee ID in order to continue."
+ 
+   constructor(private _fb: FormBuilder,
+-              private _userManagementService: UserManagementService,
+-              private router: Router) { }
++    private _userManagementService: UserManagementService,
++    private router: Router,
++    private route: ActivatedRoute) { }
+ 
+-              ngOnInit() {
+-                this.forgotPasswordForm = this._fb.group({
+-                    CNP: ['', [Validators.required, Validators.pattern('[0-9]')]],
+-                    ID: ['', [Validators.required]],
+-                    FirstName: ['', [Validators.required]],
+-                    LastName: ['', [Validators.required]],
+-                })
+-            }
++  ngOnInit() {
++    this.forgotPasswordForm = this._fb.group({
++      CNP: ['', [Validators.required, Validators.pattern('[0-9]{13}')]],
++      EmployeeID: ['', [Validators.required, Validators.pattern('[0-9a-zA-z]{8}')]],
++      FirstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
++      LastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*'), Validators.max(15)]],
++    })
++  }
++
++  onSubmit() 
++  {
++    this._userManagementService.checkIfUserExists(this.forgotPasswordForm.value).subscribe(response => {
++      if(response != "" && response != null)
++      {
++        this.router.navigate(["user/forgotPassword/restore",{cnp: response}]);
++      }
++    })
++  }
+ }
+diff --git a/src/app/components/user/login-component/login-component.ts b/src/app/components/user/login-component/login-component.ts
+index 2b6daaa..8b5ced0 100644
+--- a/src/app/components/user/login-component/login-component.ts
++++ b/src/app/components/user/login-component/login-component.ts
+@@ -6,6 +6,7 @@ declare var jquery: any;
+ declare var $: any;
+ import { $, jQuery } from 'jquery';
+ import { UserManagementService } from 'src/app/Services/user.management.service';
++import { PermissionsEnum } from '../../../Models/user-rights-enums';
+ // export for others scripts to use
+ 
+ @Component({
+@@ -19,38 +20,37 @@ export class LoginComponent implements OnInit {
+     errorMessage: any;
+ 
+     constructor(private _fb: FormBuilder,
+-                private _userManagementService: UserManagementService,
+-                private router: Router) { }
++        private _userManagementService: UserManagementService,
++        private router: Router) { }
+ 
+     togglePassword() {
+-        $(".toggle-password").click(function() {
+-
++        $(".toggle-password").click(function () {
+             $(this).toggleClass("fa-eye fa-eye-slash");
+             var input = $($(this).attr("toggle"));
+             if (input.attr("type") == "password") {
+-              input.attr("type", "text");
++                input.attr("type", "text");
+             } else {
+-              input.attr("type", "password");
++                input.attr("type", "password");
+             }
+-          });
+-}
++        });
++    }
+     ngOnInit() {
+         this.userLoginForm = this._fb.group({
+             Username: ['', [Validators.required]],
+             Password: ['', [Validators.required]],
+         })
+     }
+-    takeme() 
+-    {
++    takeme() {
+         console.log("aaa");
+         this.router.navigate(['forgot']);
+     }
+ 
+     onSubmit() {
+-            this._userManagementService.loginUser(this.userLoginForm.value)
+-                .subscribe((data) => {
+-                    console.log(data);
+-                }, 
++        this._userManagementService.loginUser(this.userLoginForm.value)
++            .subscribe((data) => {
++                var x = Object.values(data);
++                console.log((x as PermissionsEnum[]).toString());
++            },
+                 error => this.errorMessage = error)
+-        }
++    }
+ }
+\ No newline at end of file
+diff --git a/src/app/components/user/restore-password/restore-password.component.css b/src/app/components/user/restore-password/restore-password.component.css
+new file mode 100644
+index 0000000..3b1b28a
+--- /dev/null
++++ b/src/app/components/user/restore-password/restore-password.component.css
+@@ -0,0 +1,4 @@
++.center 
++{
++    text-align: center;
++}
+\ No newline at end of file
+diff --git a/src/app/components/user/restore-password/restore-password.component.html b/src/app/components/user/restore-password/restore-password.component.html
+new file mode 100644
+index 0000000..f6691e5
+--- /dev/null
++++ b/src/app/components/user/restore-password/restore-password.component.html
+@@ -0,0 +1,38 @@
++<div class="container">
++  <div class="col-md-auto text-center">
++    <div class="card">
++      <div class="card card-header">
++        <h5 class="text center">Update password</h5>
++      </div>
++      <div class="card card-body">
++        <form [formGroup]="restorePasswordForm" #f="ngForm" (ngSubmit)="onSubmit()">
++          <div class="form-group">
++            <label for="password">Password</label>
++            <input type="password" 
++            id="password" 
++            class="form-control" 
++            formControlName="password"
++            data-toggle="tooltip" 
++            data-placement="right" 
++            [title]="passwordHint"
++            >
++          </div>
++          <div class="form-group">
++            <label for="confirmPassword">Confirm Password</label>
++            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
++          </div>
++          <div class="row">
++          <div class="col-md-3">
++            <div class="alert alert-danger" *ngIf="restorePasswordForm.controls.confirmPassword.errors?.MatchPassword">Passwords don't match.</div>
++          </div>
++        </div>
++        </form>
++      </div>
++      <div class="card card-footer">
++        <div class="col-md-auto text-center">
++          <button class="btn btn-success" [disabled]="!f.valid" >Submit</button>
++        </div>
++      </div>
++    </div>
++  </div>
++</div>
+\ No newline at end of file
+diff --git a/src/app/components/user/restore-password/restore-password.component.spec.ts b/src/app/components/user/restore-password/restore-password.component.spec.ts
+new file mode 100644
+index 0000000..7115555
+--- /dev/null
++++ b/src/app/components/user/restore-password/restore-password.component.spec.ts
+@@ -0,0 +1,25 @@
++import { async, ComponentFixture, TestBed } from '@angular/core/testing';
++
++import { RestorePasswordComponent } from './restore-password.component';
++
++describe('RestorePasswordComponent', () => {
++  let component: RestorePasswordComponent;
++  let fixture: ComponentFixture<RestorePasswordComponent>;
++
++  beforeEach(async(() => {
++    TestBed.configureTestingModule({
++      declarations: [ RestorePasswordComponent ]
++    })
++    .compileComponents();
++  }));
++
++  beforeEach(() => {
++    fixture = TestBed.createComponent(RestorePasswordComponent);
++    component = fixture.componentInstance;
++    fixture.detectChanges();
++  });
++
++  it('should create', () => {
++    expect(component).toBeTruthy();
++  });
++});
+diff --git a/src/app/components/user/restore-password/restore-password.component.ts b/src/app/components/user/restore-password/restore-password.component.ts
+new file mode 100644
+index 0000000..bc3265c
+--- /dev/null
++++ b/src/app/components/user/restore-password/restore-password.component.ts
+@@ -0,0 +1,37 @@
++import { Component, OnInit, Input } from '@angular/core';
++import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
++import { PasswordValidator } from '../../../Models/password-validator';
++import { ActivatedRoute } from '@angular/router';
++import { UserManagementService } from '../../../Services/user.management.service';
++
++@Component({
++  selector: 'app-restore-password',
++  templateUrl: './restore-password.component.html',
++  styleUrls: ['./restore-password.component.css']
++})
++export class RestorePasswordComponent implements OnInit {
++  @Input() passwordHint: string = "Not allowed  { [ ; ' \ . , ! @ # $ % ^ & * ( |. Min length 10 characters";
++  cnpTempVal: string;
++  restorePasswordForm: FormGroup;
++  constructor(private fb: FormBuilder,
++              private route: ActivatedRoute,
++              private _userManagementService : UserManagementService) {
++
++    this.restorePasswordForm = fb.group({
++      password: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]*'), Validators.min(10)]),
++      confirmPassword: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9]*'), Validators.min(10)])
++    }, {
++        validator: PasswordValidator.MatchPassword
++      })
++      this.cnpTempVal = this.route.snapshot.paramMap.get("cnp");
++  }
++  ngOnInit() {
++  }
++  onSubmit() {
++      let password = this.restorePasswordForm.get('password').value;
++      this._userManagementService.updatePasswordForUserWith(this.cnpTempVal, password).subscribe(response => {
++        console.log(response);
++      })
++  }
++
++}
+-- 
+2.16.1.windows.4
+
