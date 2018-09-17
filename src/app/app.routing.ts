@@ -17,7 +17,7 @@ import { OrdersAddComponent } from './components/orders/orders-add/orders-add.co
 
 
 export const router: Routes = [
-    { path: 'welcome', component: LandingPageComponent, canActivate: [AuthGuardService]},
+    { path: 'welcome', component: LandingPageComponent},
     { path: 'user/login', component: LoginComponent },
     { path: 'user/forgotPassword', component: ForgotPasswordComponent },
     { path: 'user/forgotPassword/restore', component: RestorePasswordComponent },
