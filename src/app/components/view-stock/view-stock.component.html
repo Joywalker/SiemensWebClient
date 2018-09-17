@@ -1,6 +1,9 @@
 <div class="container">
-  <div class="row" *ngFor="let field of stockArray">
-    <div class="col-lg-10 col-md-10 col-sm-10">
+  <div *ngIf="isOk" style="display: block">
+    <canvas baseChart [datasets]="barChartData" [chartType]="barChartType"></canvas>
+  </div>
+  <div class="row">
+    <div class="col-lg-10">
       <table class="table">
         <thead>
           <tr>
@@ -11,17 +14,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let field of stockArray">
             <td>{{field.Name}}</td>
             <td>{{field.NumberOfBags}}</td>
             <td>{{field.Recipe}}</td>
-            <td>{{field.ManufactureDate}}</td>
+            <td>{{field.ManufactureDate.split("T")[0]}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
-  <div *ngIf="isOk" style="display: block">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-      [chartType]="barChartType"></canvas>
   </div>
