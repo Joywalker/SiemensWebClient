@@ -22,9 +22,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()">View Feedstock</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a>
-                    <a class="dropdown-item" *ngIf="auth.isUserEngineer()">Storage Edit</a>
-                </div>
+                    <a class="dropdown-item" *ngIf="auth.isUserEngineer() || auth.isUserOperator()" [routerLink]="['storage']">Storage View</a></div>
             </li>
             <li class="nav-item dropdown" *ngIf="!auth.isUserAdmin()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

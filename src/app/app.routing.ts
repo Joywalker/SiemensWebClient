@@ -19,8 +19,8 @@ export const router: Routes = [
     { path: 'user/forgotPassword', component: ForgotPasswordComponent },
     { path: 'user/forgotPassword/restore', component: RestorePasswordComponent },
     { path: 'register', component: RegisterComponent,canActivate: [AuthGuardService] },
-    { path: 'storage', component: StorageManagementComponent, canActivate: [AuthGuardService] }, //d
-    { path: 'storage/edit', component: StorageEditComponent, canActivate: [AuthGuardService] }, // d
+    { path: 'storage', component: StorageManagementComponent,canActivate: [AuthGuardService] },
+    { path: 'storage/edit', component: StorageEditComponent,canActivate: [AuthGuardService] },
     { path: 'recipe/add', component: RecipeAddComponent, canActivate: [AuthGuardService]},
     { path: 'recipe/edit/:id', component: RecipeAddComponent, canActivate: [AuthGuardService] },
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},

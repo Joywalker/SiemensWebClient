@@ -4,6 +4,8 @@ import { StorageManagementService } from '../../Services/storage.management.serv
 import { StorageEntryViewModel } from '../../Models/storage-entry-view-model';
 import { MapValuesPipe } from '../../Services/get-values-pipe'
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { AuthGuardService } from '../../Services/auth-guard-service';
+import { AuthService } from '../../Services/auth-service';
 
 @Component({
   selector: 'app-storage-management',
@@ -15,7 +17,7 @@ export class StorageManagementComponent implements OnInit {
  
   storageMap? : Map<number, StorageEntryViewModel[]> = new Map<number, StorageEntryViewModel[]>();
   selectedStorage: StorageEntryViewModel[];
-  constructor(private storageService: StorageManagementService, private router: Router, private fb: FormBuilder) {}
+  constructor(private auth: AuthService,private storageService: StorageManagementService, private router: Router, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.storageService.getAllDataFromStorage().subscribe(data => {
