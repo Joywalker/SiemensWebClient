@@ -48,7 +48,10 @@ export class ViewStockComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
+<<<<<<< HEAD
     
+=======
+>>>>>>> feature/Client-002.RecipesManagement
   }
 }
 
