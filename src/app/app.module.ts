@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from '../app/app.routing';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { SidebarModule } from 'ng-sidebar';
 import { AuthService } from './Services/auth-service';
+
 
 import { MapValuesPipe } from './Services/get-values-pipe';
 
