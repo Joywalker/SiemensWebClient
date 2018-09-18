@@ -6,6 +6,7 @@ declare var $: any;
 import { $, jQuery } from 'jquery';
 import { UserModel } from '../../../Models/user-model';
 import { UserManagementService } from '../../../Services/user.management.service';
+import { Router } from '@angular/router';
 // export for others scripts to use
 
 @Component({
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   userRegistrationForm: FormGroup;
   userModel: UserModel;
   constructor(private _fb: FormBuilder,
-    private _userManagementService: UserManagementService) { }
+    private _userManagementService: UserManagementService,
+    private _router: Router) { }
 
   ngOnInit() {
     this.userRegistrationForm = this._fb.group({
@@ -35,10 +37,14 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
 
     this.userModel = <UserModel>this.userRegistrationForm.value;
-    console.log(this.userModel);
     this._userManagementService.saveUser(this.userModel)
       .subscribe(result => {
-        console.log(result);
+        if(result) {
+          alert("User added succesfully!");
+          this._router.navigateByUrl("user/login");
+        } else{
+          alert("Failed!" + result);
+        }
       })
   }
 

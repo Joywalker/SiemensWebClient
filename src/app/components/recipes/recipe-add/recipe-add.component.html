@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col-md-4 col-centered">
       <label class="label" for="RecipeNameID">Recipe Name</label>
-      <input class="form-control" [(ngModel)]="recipeName" type="text" id="RecipeNameID" minlength="4" placeholder="Recipe Name Here" required>
+      <input class="form-control" [(ngModel)]="recipeName" type="text" id="RecipeNameID" minlength="4" placeholder="Recipe Name Here*" required
+      >
     </div>
   </div>
   <br>
@@ -73,7 +74,7 @@
   <br>
   <div class="row">
     <div class="col-lg-6 pull-left">
-      <button class="btn btn-outline-success " (click)="finishRecipe() ">Finish</button>
+      <button class="btn btn-outline-success" [disabled]="recipeName.length < 5" (click)="finishRecipe() " data-toggle="tooltip" data-placement="right" [title]="'Complete all fields with *'">Finish</button>
     </div>
     <div class="col-lg-6 pull-right">
         <button class="btn btn-danger " (click)="deleteRecipe(recipeName) ">Delete Recipe</button>

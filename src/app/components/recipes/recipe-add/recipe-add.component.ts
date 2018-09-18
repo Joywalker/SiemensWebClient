@@ -6,6 +6,7 @@ import { RecipeAction } from '../../../Models/Recipe/action-view-model';
 import { Ingredient } from '../../../Models/Recipe/ingredient-view-model';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-recipes',
@@ -13,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./recipe-add.component.css']
 })
 export class RecipeAddComponent implements OnInit {
+  animationState = 'in';
   @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
@@ -36,7 +38,7 @@ export class RecipeAddComponent implements OnInit {
     })
     this.sub = this._routeConfigService.params.subscribe(params => {
       var id = params['id'];
-      if (id != null || id != '') {
+      if (id != undefined) {
         var recipe = this._recipeManagementService.getRecipeByID(id);
         this.recipeName = recipe.RecipeName;
         if (recipe != null) {
@@ -67,7 +69,12 @@ export class RecipeAddComponent implements OnInit {
       'Quantity': new FormControl(null, Validators.required),
       'Measurement': new FormControl(null, Validators.required),
     });
-    (<FormArray>this.recipesFormGroup.get('ingredients')).push(ingredientElement);
+    const iArray = (<FormArray>this.recipesFormGroup.get('ingredients'));
+    if (iArray.length < this._recipeManagementService.INGREDIENTS_LIMIT) {
+      iArray.push(ingredientElement);
+    } else {
+      alert("Too many ingredients!");
+    }
   }
 
   addAction() {
@@ -76,7 +83,12 @@ export class RecipeAddComponent implements OnInit {
       'ActionTime': new FormControl(null, Validators.required),
       'ActionTimeUnit': new FormControl(null, Validators.required),
     });
-    (<FormArray>this.recipesFormGroup.get('actions')).push(action);
+    const aArray = (<FormArray>this.recipesFormGroup.get('actions'));
+    if (aArray.length < this._recipeManagementService.ACTIONS_LIMIT) {
+      aArray.push(action);
+    } else {
+      alert("Too many actions!");
+    }
   }
 
   deleteRowAt(index: number, type: string) {
@@ -132,10 +144,10 @@ export class RecipeAddComponent implements OnInit {
     var recipe = this.buildRecipe();
     this._recipeManagementService.sendRecipe(recipe).subscribe(response => {
       if (response == true) {
-        alert('Recipe added succesfull');
+        $("#alertOK").addClass('in');
+        this._router.navigateByUrl("/recipe/get")
       } else {
-        alert('ERROR : check console');
-        console.log(response);
+        $("#alertFAIL").addClass('in');
       }
     })
   }

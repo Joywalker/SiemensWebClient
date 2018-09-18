@@ -12,7 +12,7 @@ import { StockEntryViewModel } from '../../Models/stock-entry-view-model';
   styleUrls: ['./view-stock.component.css']
 })
 
-export class ViewStockComponent implements OnInit, AfterContentInit {
+export class ViewStockComponent implements OnInit {
 
   stockArray: Array<StockEntryViewModel>;
   constructor(private stockManagementService: ViewStockManagementService) { }
@@ -45,10 +45,6 @@ export class ViewStockComponent implements OnInit, AfterContentInit {
           this.isOk = true;
         }))
      })
-  }
-
-  ngAfterContentInit() {
-    
   }
 }
 
