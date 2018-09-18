@@ -24,8 +24,7 @@ export class UserManagementService {
     }
     saveUser(user: UserModel) {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        let body = user.Username + ":" + user.Password;
-        return this._http.post(URLMapper.API_URL + URLMapper.API_REGISTER_NEW_USER, body, { headers: headers })
+        return this._http.post(URLMapper.API_URL + URLMapper.API_REGISTER_NEW_USER, user, { headers: headers })
     }
     updatePasswordForUserWith(cnp: string, newPassword: string) {
         let headers = new HttpHeaders({ 'Content-Type': 'Text' });
