@@ -1,5 +1,4 @@
 export class OrderViewModel {
-    ID_order?: number;
     Recipe!: string;
     Amount!: number;
     /**

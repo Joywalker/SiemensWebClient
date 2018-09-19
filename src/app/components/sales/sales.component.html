@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <h5>Sales Management</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="salesModelForm" class="form-inline">
+          <div class="form-row">
+            <div class="col">
+              <label class="text-center" for="clientSelectID">Client</label>
+              <select class="form-control" id="clientSelectID" formControlName="Client">
+                <option *ngFor="let client of clientsArray" [ngValue]="client">{{client}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="amountID">Count</label>
+              <input class="form-control" id="amountID" type="number" formControlName="Amount">
+            </div>
+            <div class="col">
+                <label class="text-center" for="recipeID">Recipe</label>
+                <select class="form-control" id="recipeID" formControlName="Recipe">
+                  <option *ngFor="let recipe of recipesNameArray" [ngValue]="recipe">{{recipe}}</option>
+                </select>
+              </div>
+            <div class="col">
+              <label for="priceID">Price<i class="input-group-addon fa fa-dollar" style="padding-left:1rem;"></i></label>
+              <div class="input-group">
+                <input class="form-control" id="priceID" type="number" formControlName="PricePerUnit">
+              </div>
+            </div>
+            <div class="col">
+              <label for="priceTVAID">TVA(19%)</label>
+              <p style="text-align:center; margin-top: 0.4rem;" id="priceTVAID">{{priceTVA}}</p>
+            </div>
+          </div>
+        </form>
+        <br>
+        <button class="btn btn-success" (click)="onSubmit()">Sell</button>
+      </div>
+    </div>
+  </div>
+</div>

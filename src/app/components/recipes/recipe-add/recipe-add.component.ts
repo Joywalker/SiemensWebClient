@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
-import { RecipeManagementService } from '../../../Services/recipe-management-service';
-import { isBoolean } from 'util';
 import { RecipeAction } from '../../../Models/Recipe/action-view-model';
 import { Ingredient } from '../../../Models/Recipe/ingredient-view-model';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
+import { RecipeManagementService } from '../../../Services/recipe-management.service';
 
 @Component({
   selector: 'app-recipes',

@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, AfterViewChecked } from '@angular/core';
-import { RecipeManagementService } from '../../../Services/recipe-management-service';
+import { RecipeManagementService } from '../../../Services/recipe-management.service';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 import { Router } from '@angular/router';
 import * as $ from 'jquery'

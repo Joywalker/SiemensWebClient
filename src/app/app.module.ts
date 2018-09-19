@@ -21,7 +21,6 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
 import { StorageManagementComponent } from './components/storage-management/storage-management.component';
 import { UserManagementService } from './Services/user.management.service';
 import { StorageManagementService } from './Services/storage.management.service';
-import { RecipeManagementService } from './Services/recipe-management-service';
 import { RecipeAddComponent } from './components/recipes/recipe-add/recipe-add.component';
 import { RecipeViewComponent } from './components/recipes/recipe-view/recipe-view.component';
 import { RestorePasswordComponent } from './components/user/restore-password/restore-password.component';
@@ -32,6 +31,9 @@ import { StorageEditComponent } from './components/storage-management/storage-ed
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 import { OrdersManagementService } from './Services/orders.management.service';
 import { OrdersComponent } from './components/orders/orders-view/orders.component';
+import { SalesComponent } from './components/sales/sales.component';
+import { SalesManagementService } from './Services/sales-management.service';
+import { RecipeManagementService } from './Services/recipe-management.service';
 
 
 
@@ -50,7 +52,8 @@ import { OrdersComponent } from './components/orders/orders-view/orders.componen
     ViewStockComponent,
     StorageEditComponent,
     OrdersComponent,
-    OrdersAddComponent
+    OrdersAddComponent,
+    SalesComponent
 
   ],
   imports: [
@@ -67,7 +70,7 @@ import { OrdersComponent } from './components/orders/orders-view/orders.componen
     SidebarModule.forRoot()
 
   ],
-  providers: [UserManagementService, StorageManagementService, RecipeManagementService,ViewStockManagementService,OrdersManagementService, AuthService,AuthGuardService],
+  providers: [UserManagementService, StorageManagementService, RecipeManagementService,ViewStockManagementService,OrdersManagementService,SalesManagementService, AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

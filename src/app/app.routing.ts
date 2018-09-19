@@ -13,6 +13,7 @@ import { StorageEditComponent } from './components/storage-management/storage-ed
 import { OrdersComponent } from './components/orders/orders-view/orders.component';
 import { OrdersAddComponent } from './components/orders/orders-add/orders-add.component';
 import { ViewStockComponent } from './components/view-stock/view-stock.component';
+import { SalesComponent } from './components/sales/sales.component';
 
 
 
@@ -31,7 +32,7 @@ export const router: Routes = [
     { path: 'recipe/get', component: RecipeViewComponent, canActivate: [AuthGuardService]},
     { path: 'stock/view', component: ViewStockComponent, canActivate: [AuthGuardService]},
     { path: 'orders/view', component: OrdersComponent, canActivate: [AuthGuardService]},
-    { path: 'orders/add', component: OrdersAddComponent, canActivate: [AuthGuardService]}
-
+    { path: 'orders/add', component: OrdersAddComponent, canActivate: [AuthGuardService]},
+    { path: 'sales', component: SalesComponent, canActivate: [AuthGuardService]}
     ];
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

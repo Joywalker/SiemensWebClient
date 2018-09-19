@@ -16,4 +16,6 @@ export class URLMapper {
     public static get API_UPDATE_USER_PASSWORD(): string { return "api/user/updatePassword"; }
     public static get API_REGISTER_NEW_USER(): string { return "api/user/register"; }
     public static get API_SAVE_RECIPE_URL_PATH(): string { return "api/recipe/add"; }
+    public static get API_SALES_SELL(): string { return "api/sales/sell"; }
+    public static get API_SALES_GET_CLIENTS(): string { return "api/sales/getAllClients"; }
 }

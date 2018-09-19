@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { OrdersManagementService } from '../../../Services/orders.management.service';
-import { RecipeManagementService } from '../../../Services/recipe-management-service';
+import { RecipeManagementService } from '../../../Services/recipe-management.service';
 import { RecipeViewModel } from '../../../Models/Recipe/recipe-view-model';
 import { OrderViewModel } from '../../../Models/order-view-model';
 import { Router } from '@angular/router';
