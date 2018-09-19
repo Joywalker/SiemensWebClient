@@ -16,12 +16,8 @@ import { SlideInOutAnimation } from '../../../Services/animations';
   animations: [SlideInOutAnimation]
 })
 export class RecipeAddComponent implements OnInit {
-<<<<<<< Updated upstream
-
-=======
   animationState = 'in';
   valid: boolean =false;
->>>>>>> Stashed changes
   @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
