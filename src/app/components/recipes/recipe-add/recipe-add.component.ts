@@ -18,8 +18,8 @@ export class RecipeAddComponent implements OnInit {
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
-  recipeMeasurementUnitsArray = ['kg', 'g', 'mg'];
-  recipeActionsTimeUnitsArray = ['min', 'hours', 'days', 'sec'];
+  recipeMeasurementUnitsArray = ['kg', 'g'];
+  recipeActionsTimeUnitsArray = ['min', 'hours'];
   ingredientsArray = new FormArray([]);
   actionsArray = new FormArray([]);
   recipesFormGroup: FormGroup;
@@ -113,7 +113,20 @@ export class RecipeAddComponent implements OnInit {
         actions.at(i).get('ActionTime').value,
         actions.at(i).get('ActionTimeUnit').value
       );
-      Actions.push(action);
+      if (action.ActionName == 'Mix') {
+        if ((action.TimeMeasurementUnit == 'min' && action.Duration > 1440) || ((action.TimeMeasurementUnit == 'hours' && action.Duration > 24))) {
+          alert('Time should be between 1 min - 1 day')
+        } else {
+          Actions.push(action);
+        }
+      }
+      if (action.ActionName == 'Cook') {
+        if ((action.TimeMeasurementUnit == 'min' && action.Duration < 10) || ((action.TimeMeasurementUnit == 'hours' && action.Duration > 1))) {
+          alert('Time should be between 10 min - 1hour')
+        } else {
+          Actions.push(action);
+        }
+      }
     }
     return Actions;
   }
