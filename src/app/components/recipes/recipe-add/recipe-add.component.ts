@@ -16,7 +16,12 @@ import { SlideInOutAnimation } from '../../../Services/animations';
   animations: [SlideInOutAnimation]
 })
 export class RecipeAddComponent implements OnInit {
+<<<<<<< Updated upstream
 
+=======
+  animationState = 'in';
+  valid: boolean =false;
+>>>>>>> Stashed changes
   @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
@@ -117,18 +122,24 @@ export class RecipeAddComponent implements OnInit {
         actions.at(i).get('ActionTimeUnit').value
       );
       if (action.ActionName == 'Mix') {
+        this.valid = false;
         if ((action.TimeMeasurementUnit == 'min' && action.Duration > 1440) || ((action.TimeMeasurementUnit == 'hours' && action.Duration > 24))) {
           alert('Time should be between 1 min - 1 day')
         } else {
-          Actions.push(action);
+          this.valid = true;
         }
+        if(this.valid)
+        Actions.push(action);
       }
       if (action.ActionName == 'Cook') {
+        this.valid = false;
         if ((action.TimeMeasurementUnit == 'min' && action.Duration < 10) || ((action.TimeMeasurementUnit == 'hours' && action.Duration > 1))) {
           alert('Time should be between 10 min - 1hour')
         } else {
-          Actions.push(action);
+          this.valid = true;
         }
+        if(this.valid)
+        Actions.push(action);
       }
     }
     return Actions;
