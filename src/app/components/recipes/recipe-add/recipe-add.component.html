@@ -74,7 +74,7 @@
   <br>
   <div class="row">
     <div class="col-lg-6 pull-left">
-      <button class="btn btn-outline-success" [disabled]="recipeName.length < 5" (click)="finishRecipe() " data-toggle="tooltip" data-placement="right" [title]="'Complete all fields with *'">Finish</button>
+      <button class="btn btn-outline-success" [disabled]="recipeName.length < 5 && !this.valid" (click)="finishRecipe() " data-toggle="tooltip" data-placement="right" [title]="'Complete all fields with *'">Finish</button>
     </div>
     <div class="col-lg-6 pull-right">
         <button class="btn btn-danger " (click)="deleteRecipe(recipeName) ">Delete Recipe</button>
