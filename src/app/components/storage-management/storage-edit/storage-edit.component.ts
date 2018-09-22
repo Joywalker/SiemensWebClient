@@ -51,7 +51,7 @@ export class StorageEditComponent implements OnInit {
       );
 
       this.storageService.putRequestToEditWarehouse(editStorageModel).subscribe(response => {
-        if (response != '' && response == 'Ok!'){
+        if (response != '' && response == 'Ok'){
           $('#qttID').css('border','1px solid green');
         } else {
           $('#qttID').css('border','2px solid red');

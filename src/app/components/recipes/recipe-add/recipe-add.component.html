@@ -13,7 +13,7 @@
     <hr>
     <div class="row">
       <div class="col-sm-8" formArrayName='ingredients'>
-        <div class="row form-group form-horizontal" *ngFor="let recipe of recipesFormGroup.get('ingredients').controls; let i = index" [formGroupName]="i">
+        <div class="row form-group form-horizontal" *ngFor="let recipe of recipesFormGroup.get('ingredients')['controls']; let i = index" [formGroupName]="i">
           <div class="col-sm-4">
             <label for="feedstockID">Material {{i+1}}</label>
             <select class="form-control" formControlName="FeedStock">
@@ -46,7 +46,7 @@
     <br>
     <div class="row">
       <div class="col-sm-8" formArrayName='actions'>
-        <div class="row" *ngFor="let action of recipesFormGroup.get('actions').controls; let i = index" [formGroupName]="i">
+        <div class="row" *ngFor="let action of recipesFormGroup.get('actions')['controls']; let i = index" [formGroupName]="i">
           <div class="col-sm-4">
             <label for="actionID">Action</label>
             <select formControlName="ActionName" id="actionID" class="form-control">

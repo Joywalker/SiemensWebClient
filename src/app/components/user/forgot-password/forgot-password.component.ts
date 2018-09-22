@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserManagementService } from '../../../Services/user.management.service';
@@ -11,7 +11,8 @@ import { UserManagementService } from '../../../Services/user.management.service
 export class ForgotPasswordComponent implements OnInit {
 
   forgotPasswordForm: FormGroup;
-
+   @Input() public cnpHint = "Personal Identification Number";
+   @Input() public employeeIDHint = "Employee ID 8 characters.";
   constructor(private _fb: FormBuilder,
               private _userManagementService: UserManagementService,
               private router: Router) { }

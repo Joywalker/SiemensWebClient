@@ -9,7 +9,7 @@ import { UserManagementService } from './Services/user.management.service';
 })
 export class AppComponent {
   
-  constructor(private auth: AuthService, private userManagementService: UserManagementService) {
+  constructor(public auth: AuthService, public userManagementService: UserManagementService) {
   }
   
 

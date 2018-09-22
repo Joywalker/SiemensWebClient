@@ -10,9 +10,9 @@ import { PasswordValidator } from '../../../Models/password-validator';
   styleUrls: ['./restore-password.component.css']
 })
 export class RestorePasswordComponent implements OnInit {
-  @Input() passwordHint: string = "Not allowed  { [ ; ' \ . , ! @ # $ % ^ & * ( |. Min length 10 characters";
-  cnpTempVal: string;
-  restorePasswordForm: FormGroup;
+  @Input() public passwordHint: string = "Not allowed  { [ ; ' \ . , ! @ # $ % ^ & * ( |. Min length 10 characters";
+  public cnpTempVal: string;
+  public restorePasswordForm: FormGroup;
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,

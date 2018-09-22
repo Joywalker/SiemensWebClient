@@ -34,6 +34,7 @@ import { OrdersComponent } from './components/orders/orders-view/orders.componen
 import { SalesComponent } from './components/sales/sales.component';
 import { SalesManagementService } from './Services/sales-management.service';
 import { RecipeManagementService } from './Services/recipe-management.service';
+import { DatePipe } from 'src/app/Services/date-pipe';
 
 
 
@@ -53,7 +54,8 @@ import { RecipeManagementService } from './Services/recipe-management.service';
     StorageEditComponent,
     OrdersComponent,
     OrdersAddComponent,
-    SalesComponent
+    SalesComponent,
+    DatePipe
 
   ],
   imports: [

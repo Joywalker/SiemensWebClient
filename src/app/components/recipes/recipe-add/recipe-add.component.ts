@@ -18,7 +18,7 @@ export class RecipeAddComponent implements OnInit {
   @Input() recipeName: String = "";
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
-  recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Flavours', 'Paprika', 'BBQ', 'Pepper', 'Potatoes', 'Flour', 'Cheese', 'Starch'];
+  recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Paprika', 'BBQ', 'Pepper', 'Flour', 'Cheese', 'Starch'];
   recipeMeasurementUnitsArray = ['kg', 'g'];
   recipeActionsTimeUnitsArray = ['min', 'hours'];
   ingredientsArray = new FormArray([]);
@@ -31,6 +31,8 @@ export class RecipeAddComponent implements OnInit {
     private _routeConfigService: ActivatedRoute,
     private _router: Router) { }
 
+    get formIngredients() { return <FormArray>this.recipesFormGroup.get('ingredients'); }
+    get formActions() { return <FormArray>this.recipesFormGroup.get('actions'); }
   ngOnInit() {
     this.recipesFormGroup = new FormGroup({
       'ingredients': this.ingredientsArray,
