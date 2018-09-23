@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { OrdersManagementService } from '../../../Services/orders.management.service';
 import { RecipeManagementService } from '../../../Services/recipe-management.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class OrdersAddComponent implements OnInit {
   recipeNames: String[] = [];
+  @Input() responseMessage;
   isLoaded: boolean = false;
   orderFormGroup: FormGroup;
   constructor(private orderService: OrdersManagementService,
@@ -28,6 +29,7 @@ export class OrdersAddComponent implements OnInit {
   }
 
   ngOnInit() {
+   
     this.orderFormGroup = this._fb.group({
       Recipe: ['', Validators.required],
       Amount: ['', Validators.required],
@@ -39,12 +41,16 @@ export class OrdersAddComponent implements OnInit {
     const amount = this.orderFormGroup.get('Amount').value;
 
     this.orderService.placeOrder(new OrderViewModel(recipeName, amount)).subscribe(response => {
-      if (response.isPrototypeOf(String)) {
-        if(response == 'SUCCESS')
-        {
-          alert('Success');
+      if (response == 'OK') {
+        $(document).ready(function() {
+          $('.alert').addClass('alert-success');
+          setTimeout(function() {$('alert').fadeIn()},500);
+          setTimeout(function() {$('alert').fadeOut()},1000);
+        })
+        setTimeout(() => {
           this.router.navigateByUrl('orders/view');
-        }
+        }, 1200);
+        this.responseMessage="SUCCES: Order succesfully placed";
       } else {
         console.log(response);
       }

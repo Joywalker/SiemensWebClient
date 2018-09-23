@@ -9,6 +9,7 @@ import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { SidebarModule } from 'ng-sidebar';
 import { AuthService } from './Services/auth-service';
 import { ChartsModule } from 'ng2-charts'
+import { AlertsModule } from 'angular-alert-module';
 
 
 import { MapValuesPipe } from './Services/get-values-pipe';
@@ -69,6 +70,7 @@ import { DatePipe } from 'src/app/Services/date-pipe';
     BrowserAnimationsModule,
     MatCheckboxModule,
     ChartsModule,
+    AlertsModule.forRoot(),
     SidebarModule.forRoot()
 
   ],

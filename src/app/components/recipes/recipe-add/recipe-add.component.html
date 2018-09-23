@@ -1,10 +1,13 @@
+<div class="alert">
+  {{responseMessage}}
+</div>
 <div class="container">
   <br>
   <div class="row">
     <div class="col-md-4 col-centered">
       <label class="label" for="RecipeNameID">Recipe Name</label>
-      <input class="form-control" [(ngModel)]="recipeName" type="text" id="RecipeNameID" minlength="4" placeholder="Recipe Name Here*" required
-      >
+      <input class="form-control" [(ngModel)]="recipeName" type="text" id="RecipeNameID" minlength="4" placeholder="Recipe Name Here*"
+        required>
     </div>
   </div>
   <br>
@@ -13,7 +16,8 @@
     <hr>
     <div class="row">
       <div class="col-sm-8" formArrayName='ingredients'>
-        <div class="row form-group form-horizontal" *ngFor="let recipe of recipesFormGroup.get('ingredients')['controls']; let i = index" [formGroupName]="i">
+        <div class="row form-group form-horizontal" *ngFor="let recipe of recipesFormGroup.get('ingredients')['controls']; let i = index"
+          [formGroupName]="i">
           <div class="col-sm-4">
             <label for="feedstockID">Material {{i+1}}</label>
             <select class="form-control" formControlName="FeedStock">
@@ -66,19 +70,20 @@
           <div class="col-sm-2">
             <label for="deletebuttonID">Remove</label>
             <button class="btn btn-danger fa fa-minus" (click)="deleteRowAt(i,'action')" id="deletebuttonID"></button>
-            </div>
           </div>
         </div>
       </div>
+    </div>
   </form>
   <br>
   <div class="row">
     <div class="col-lg-6 pull-left">
-      <button class="btn btn-outline-success" [disabled]="recipeName.length < 5 && !this.valid" (click)="finishRecipe() " data-toggle="tooltip" data-placement="right" [title]="'Complete all fields with *'">Finish</button>
+      <button class="btn btn-outline-success" [disabled]="recipeName.length < 5 && !this.valid" (click)="finishRecipe() " data-toggle="tooltip"
+        data-placement="right" [title]="'Complete all fields with *'">Finish</button>
     </div>
     <div class="col-lg-6 pull-right">
-        <button class="btn btn-danger " (click)="deleteRecipe(recipeName) ">Delete Recipe</button>
-      </div>
+      <button class="btn btn-danger " (click)="deleteRecipe(recipeName) ">Delete Recipe</button>
+    </div>
   </div>
   <hr>
 </div>

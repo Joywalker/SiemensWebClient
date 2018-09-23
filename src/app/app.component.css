@@ -6,3 +6,6 @@ span {
     color: blanchedalmond;
     text-align: center;
 }
+#alerts {
+    border: 2px solid red;
+}

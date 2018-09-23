@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 declare var jquery: any;
 declare var $: any;
-import { $, jQuery } from 'jquery';
 import { UserModel } from '../../../Models/user-model';
 import { UserManagementService } from '../../../Services/user.management.service';
 import { Router } from '@angular/router';
@@ -16,8 +15,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  userRegistrationForm: FormGroup;
-  userModel: UserModel;
+  public userRegistrationForm: FormGroup;
+  public userModel: UserModel;
+  @Input() responseMessage = "";
   constructor(private _fb: FormBuilder,
     private _userManagementService: UserManagementService,
     private _router: Router) { }
@@ -35,15 +35,26 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.userModel = <UserModel>this.userRegistrationForm.value;
     this._userManagementService.saveUser(this.userModel)
       .subscribe(result => {
         if(result) {
-          alert("User added succesfully!");
-          this._router.navigateByUrl("user/login");
+          this.responseMessage = "User " + this.userModel.Username + " was added succesfully!";
+          $(document).ready(function() {
+            $('.container>.alert').addClass('alert-info');
+            setTimeout(function(){$('.container>.alert').fadeIn()},200);
+            setTimeout(function(){$('.container>.alert').fadeOut()},700);
+          })
+            setTimeout(() => {
+              this._router.navigateByUrl("user/login");
+            },1000)
         } else{
-          alert("Failed!" + result);
+          this.responseMessage = "Failed to add user "+this.userModel.Username;
+          $(document).ready(function() {
+            $('.container>.alert').removeClass('alert-info').addClass('alert-danger');
+            setTimeout(function(){$('.container>.alert').fadeIn()},200);
+            setTimeout(function(){$('.container>.alert').fadeOut()},700);
+          })
         }
       })
   }

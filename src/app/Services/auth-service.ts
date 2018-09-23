@@ -22,15 +22,18 @@ export class AuthService {
     isUserAuthenticated(username: string, password: string): Observable<boolean> {
         const user = new UserViewModel(username, password);
         return this._userManagementService.loginUser(user).pipe(
-            map((collection: {[key: string]: PermissionsEnum[]}) => {
-                let role = Object.keys(collection)[0];
-                let permissions = Object.values(collection);
-                if (role != '' && role != null) {
-                    this.isLoggedIn = true;
-                    this.setUser(username, role);
-                    this.setUserPermissions(permissions);
-                } else {
+            map((response: any) => {
+                if (response == 'FAILED') {
                     this.isLoggedIn = false;
+                } else {
+                    let role = Object.keys(response)[0];
+                    let permissions = Object.values(response);
+                    if (role != '' && role != null) {
+                        console.log(role);
+                        this.isLoggedIn = true;
+                        this.setUser(username, role);
+                        this.setUserPermissions(permissions);
+                    }
                 }
                 return this.isLoggedIn;
             })
@@ -46,15 +49,15 @@ export class AuthService {
         return this.isLoggedIn;
     }
     isUserAdmin() {
-        return (this.loggedInUser.role == 'ADMIN')? true : false;
+        return (this.loggedInUser.role == 'ADMIN') ? true : false;
     }
     isUserOperator() {
-        return (this.loggedInUser.role == 'OPERATOR')? true : false;
+        return (this.loggedInUser.role == 'OPERATOR') ? true : false;
     }
     isUserEngineer() {
-        return (this.loggedInUser.role == 'ENGINEER')? true : false;
+        return (this.loggedInUser.role == 'ENGINEER') ? true : false;
     }
-    getUserPermissions(){
+    getUserPermissions() {
         return this.permissions;
     }
     getRedirectUrl(): string {

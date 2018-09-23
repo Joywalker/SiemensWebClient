@@ -1,9 +1,9 @@
-export interface StorageEntryViewModel {
-      ID_warehouse : number
-      ID_compartment : number
-      feedstockName : string
-      quantityStored : string
-      newestDateOfSupply : Date
-      oldestDateOfSupply : Date
-      quantityFromTheOldestDate : string
+export class StorageEntryViewModel {
+      FeedstockName: string;
+      ID_compartment: number;
+      ID_warehouse: number;
+      NewestDateOfSupply: Date;
+      OldestDateOfSupply: Date;
+      QuantityFromTheOldestDate: number;
+      QuantityStored: number;
 }

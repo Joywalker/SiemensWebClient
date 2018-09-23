@@ -1,8 +1,9 @@
 <div class="div-center">
+  <div class="alert">{{successMessage}}
+  </div>
   <div class="card">
     <div class="card card-header">
       <h5 class="text-center header">Edit Storage</h5>
-    
     </div>
     <div class="card-body">
       <form class="form-horizontal" [formGroup]="storageEditFormGroup" (ngSubmit)="onSubmit()">
@@ -52,7 +53,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-success text-center" type="submit">Next</button> 
+          <button class="btn btn-success text-center" type="submit">Next</button>
           <button class="btn btn-warning" style="margin-left: 1rem;" [routerLink]="['../']">Cancel</button>
           <br>
         </div>

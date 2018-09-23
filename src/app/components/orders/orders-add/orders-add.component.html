@@ -1,3 +1,6 @@
+<div class="alert">
+  {{responseMessage}}
+</div>
 <div class="row" *ngIf="isLoaded">
   <div class="div-center">
     <div class="card user-card">
@@ -14,7 +17,7 @@
           <div class="row">
             <div class="col-md-8 text-center">
               <label for="amountID"># of bags</label>
-              <input class="form-control" id="amountID" type="number" min="0" formControlName="Amount">
+              <input class="form-control" id="amountID" type="number" min="100" formControlName="Amount">
             </div>
           </div>
           <br>

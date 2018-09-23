@@ -11,6 +11,7 @@ import { PasswordValidator } from '../../../Models/password-validator';
 })
 export class RestorePasswordComponent implements OnInit {
   @Input() public passwordHint: string = "Not allowed  { [ ; ' \ . , ! @ # $ % ^ & * ( |. Min length 10 characters";
+  @Input() public responseMessage: string = '';
   public cnpTempVal: string;
   public restorePasswordForm: FormGroup;
   constructor(private fb: FormBuilder,
@@ -27,15 +28,22 @@ export class RestorePasswordComponent implements OnInit {
       this.cnpTempVal = this.route.snapshot.paramMap.get("cnp");
   }
   ngOnInit() {
+    $('.container>.alert').hide();
   }
   onSubmit() {
       let password = this.restorePasswordForm.get('password').value;
       this._userManagementService.updatePasswordForUserWith(this.cnpTempVal, password).subscribe(response => {
         if(response)
         {
-          this.router.navigateByUrl("user/login");
+          this.responseMessage = 'Password changed succesfully!';
+          $(document).ready(function() {
+            setTimeout(function() {$('.container>.alert').fadeIn()}, 200);
+            setTimeout(function() {$('.container>.alert').fadeOut()}, 300);
+          });
+          setTimeout(() => {
+            this.router.navigateByUrl('user/login');}
+          , 1500);
         }
       })
   }
-
 }

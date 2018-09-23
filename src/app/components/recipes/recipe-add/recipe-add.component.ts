@@ -16,6 +16,7 @@ export class RecipeAddComponent implements OnInit {
   animationState = 'in';
   valid: boolean =false;
   @Input() recipeName: String = "";
+  @Input() responseMessage = '';
   recipe: RecipeViewModel;
   recipeActionsArray = ['Mix', 'Cook'];
   recipeMaterialsArray = ['Potatoes', 'Sunflower Oil', 'Salt', 'Paprika', 'BBQ', 'Pepper', 'Flour', 'Cheese', 'Starch'];
@@ -163,12 +164,26 @@ export class RecipeAddComponent implements OnInit {
 
   finishRecipe() {
     var recipe = this.buildRecipe();
+    
     this._recipeManagementService.sendRecipe(recipe).subscribe(response => {
+      var alertDIV = $('.alert');
       if (response == true) {
-        $("#alertOK").addClass('in');
-        this._router.navigateByUrl("/recipe/get")
+        this.responseMessage = "Recipe with name " + recipe.RecipeName + "was edited successfully";
+        alertDIV.addClass('alert-succes');
+        $(document).ready(function() {
+          setTimeout(function() {alertDIV.fadeIn()},200);
+          setTimeout(function() {alertDIV.fadeOut()},300);
+        })
+        setTimeout(() => {
+          this._router.navigateByUrl("/recipe/get")
+        },1000);
       } else {
-        $("#alertFAIL").addClass('in');
+        this.responseMessage = "Error at editing recipe " + recipe.RecipeName;
+        alertDIV.removeClass('alert-success').addClass('alert-danger');
+        $(document).ready(function() {
+          setTimeout(function() {alertDIV.fadeIn()},200);
+          setTimeout(function() {alertDIV.fadeOut()},300);
+        })
       }
     })
   }
